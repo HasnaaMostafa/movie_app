@@ -1,11 +1,13 @@
-import 'package:bloc/bloc.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/features/home%20screen/cubits/home_state.dart';
-import 'package:movie_app/features/home%20screen/model/movie.dart';
+import 'package:movie_app/core/models/movie.dart';
 
-class HomeViewModel extends Cubit<HomeState> {
-  HomeViewModel() : super(HomeInitial());
+class HomeCubit extends Cubit<HomeState> {
+  HomeCubit() : super(HomeInitial());
 
-  void fetchMovies() {
+  Future<void> fetchMovies() async {
+    await Future.delayed(const Duration(seconds: 3));
     // Example data
     final bannerMovies = [
       Movie(
@@ -36,6 +38,30 @@ class HomeViewModel extends Cubit<HomeState> {
               'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s'),
     ];
     final recommendedMovies = [
+      Movie(
+          rating: 8.92,
+          releaseDate: "1990",
+          title: 'Movie 5',
+          imageUrl:
+              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s'),
+      Movie(
+          rating: 4,
+          releaseDate: "1990",
+          title: 'Movie 6',
+          imageUrl:
+              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s'),
+      Movie(
+          rating: 8.92,
+          releaseDate: "1990",
+          title: 'Movie 5',
+          imageUrl:
+              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s'),
+      Movie(
+          rating: 4,
+          releaseDate: "1990",
+          title: 'Movie 6',
+          imageUrl:
+              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s'),
       Movie(
           rating: 8.92,
           releaseDate: "1990",

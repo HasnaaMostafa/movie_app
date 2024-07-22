@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/features/home%20screen/model/movie.dart';
+import 'package:movie_app/core/models/movie.dart';
 import 'package:movie_app/features/home%20screen/view/widgets/movie_card.dart';
 import 'package:movie_app/features/home%20screen/view/widgets/movie_card_recommend.dart';
 
@@ -16,7 +16,11 @@ class CategorySection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      color: Theme.of(context).brightness == Brightness.dark
+          ? Colors.grey[850]
+          : Colors.grey[200],
+      margin: const EdgeInsets.only(top: 20),
       width: MediaQuery.of(context).size.width,
       child: Padding(
         padding: const EdgeInsets.all(8.0),

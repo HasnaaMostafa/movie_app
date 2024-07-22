@@ -1,4 +1,4 @@
-import 'package:movie_app/features/home%20screen/model/movie.dart';
+import 'package:movie_app/core/models/movie.dart';
 
 abstract class HomeState {}
 

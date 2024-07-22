@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/features/home%20screen/model/movie.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movie_app/core/models/movie.dart';
 import 'dart:async';
+
+import 'package:movie_app/features/home%20screen/view/widgets/poster_widget.dart';
 
 class BannerView extends StatefulWidget {
   final List<Movie> movies;
@@ -44,13 +47,70 @@ class _BannerViewState extends State<BannerView> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 250,
+      height: 260.h,
       child: PageView.builder(
         controller: _controller,
         itemCount: widget.movies.length,
         itemBuilder: (context, index) {
-          return Image.network(widget.movies[index].imageUrl,
-              fit: BoxFit.cover);
+          return Stack(
+            children: [
+              Column(
+                children: [
+                  Stack(
+                    children: [
+                      Image.network(
+                        widget.movies[index].imageUrl,
+                        fit: BoxFit.fitWidth,
+                        alignment: Alignment.center,
+                        height: 200.h,
+                        width: 1.sw,
+                      ),
+                      Container(
+                        width: 1.sw,
+                        height: 200.h,
+                        color: Colors.black.withOpacity(0.5),
+                      )
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 150.w,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(top: 8.h),
+                            child: Text(
+                              widget.movies[index].title,
+                              style: Theme.of(context).textTheme.headlineLarge,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 8.h),
+                            child: Text(
+                              widget.movies[index].releaseDate,
+                              style: Theme.of(context).textTheme.titleMedium,
+                            ),
+                          )
+                        ],
+                      )
+                    ],
+                  )
+                ],
+              ),
+              Positioned(
+                bottom: 0,
+                left: 15.w,
+                child: PosterWidget(
+                  movie: widget.movies[index],
+                  height: 160.h,
+                  width: 120.w,
+                ),
+              )
+            ],
+          );
         },
       ),
     );

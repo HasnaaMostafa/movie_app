@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/features/home%20screen/model/movie.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movie_app/core/models/movie.dart';
+import 'package:movie_app/features/home%20screen/view/widgets/poster_widget.dart';
 
 class MovieCard extends StatelessWidget {
   final Movie movie;
@@ -8,12 +10,15 @@ class MovieCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Column(
-        children: [
-          Image.network(movie.imageUrl,
-              width: 100, height: 150, fit: BoxFit.cover),
-        ],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(5),
+        child: PosterWidget(
+          movie: movie,
+          width: 100.w,
+          height: 120.h,
+        ),
       ),
     );
   }
