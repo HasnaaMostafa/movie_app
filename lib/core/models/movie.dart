@@ -1,4 +1,3 @@
-
 import 'package:movie_app/core/models/app_category.dart';
 
 class Movie {
@@ -10,7 +9,7 @@ class Movie {
   List<AppCategory> categories;
 
   Movie(
-        {this.categories = const [],
+      {this.categories = const [],
       required this.releaseDate,
       required this.rating,
       required this.title,

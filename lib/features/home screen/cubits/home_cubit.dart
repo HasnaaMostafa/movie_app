@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/core/models/app_category.dart';
 import 'package:movie_app/features/home%20screen/cubits/home_state.dart';
 import 'package:movie_app/core/models/movie.dart';
 
@@ -28,6 +29,20 @@ class HomeCubit extends Cubit<HomeState> {
     ];
     final popularMovies = [
       Movie(
+          categories: [
+            AppCategory(
+                name: "Action",
+                imageUrl:
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAS_m9Nxcvps_JexD3GgYob0Omkub3Fo1d4A&s"),
+            AppCategory(
+                name: "Action",
+                imageUrl:
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAS_m9Nxcvps_JexD3GgYob0Omkub3Fo1d4A&s"),
+            AppCategory(
+                name: "Action",
+                imageUrl:
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAS_m9Nxcvps_JexD3GgYob0Omkub3Fo1d4A&s")
+          ],
           description:
               "This is a description of the movie 6 This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
           rating: 8.5,
@@ -36,6 +51,22 @@ class HomeCubit extends Cubit<HomeState> {
           imageUrl:
               'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s'),
       Movie(
+          categories: [
+            AppCategory(
+                name: "Action",
+                imageUrl:
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAS_m9Nxcvps_JexD3GgYob0Omkub3Fo1d4A&s"),
+            AppCategory(
+                name: "Action",
+                imageUrl:
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAS_m9Nxcvps_JexD3GgYob0Omkub3Fo1d4A&s"),
+            AppCategory(
+                name: "Action",
+                imageUrl:
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAS_m9Nxcvps_JexD3GgYob0Omkub3Fo1d4A&s")
+          ],
+          description:
+              "This is a description of the movie 6 This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
           rating: 8.5,
           releaseDate: "1990",
           title: 'Movie 4',

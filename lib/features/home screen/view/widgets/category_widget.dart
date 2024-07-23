@@ -39,6 +39,10 @@ class CategorySection extends StatelessWidget {
                     return MovieCardRecommend(
                       movie: movie,
                       onPress: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => MovieInfoScreen(
+                                  movie: movie,
+                                )));
                         print(movie.title);
                       },
                     );

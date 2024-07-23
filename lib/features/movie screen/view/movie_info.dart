@@ -1,7 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/core/models/movie.dart';
-import 'package:movie_app/core/utils/theme.dart';
+import 'package:movie_app/features/home%20screen/view/widgets/category_widget.dart';
 import 'package:movie_app/features/home%20screen/view/widgets/poster_widget.dart';
 
 class MovieInfoScreen extends StatefulWidget {
@@ -69,55 +70,126 @@ class _MovieInfoScreenState extends State<MovieInfoScreen> {
                         ?.copyWith(fontSize: 12.sp, color: Colors.grey),
                   ),
                   SizedBox(height: 18.0.h),
-                  Row(children: [
-                    PosterWidget(
-                      movie: widget.movie,
-                      width: 150.w,
-                      height: 220.h,
-                    ),
-                    const CategoryText(text: 'Action'),
-                  ]),
-                  Row(
-                    children: [
-                      const Icon(Icons.star, color: Colors.yellow),
-                      SizedBox(height: 3.0.h),
-                      Text(
-                        widget.movie.rating.toString(),
-                        style: const TextStyle(fontSize: 18),
+                  SizedBox(
+                    width: 1.sw,
+                    height: 180.h,
+                    child: Row(children: [
+                      PosterWidget(
+                        movie: widget.movie,
+                        width: 110.w,
+                        height: 190.h,
                       ),
+                      SingleChildScrollView(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 8.sp),
+                              child: SizedBox(
+                                width: 250.w,
+                                child: Wrap(
+                                  children: List.generate(
+                                      (widget.movie.categories).length,
+                                      (index) {
+                                    return Padding(
+                                      padding: EdgeInsets.only(
+                                          right: 8.0.sp, bottom: 8.sp),
+                                      child: CategoryText(
+                                          text: widget
+                                              .movie.categories[index].name),
+                                    );
+                                  }),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 250.w,
+                              child: Padding(
+                                padding:
+                                    EdgeInsets.symmetric(horizontal: 8.0.sp),
+                                child: AnimatedCrossFade(
+                                  firstChild: Text(
+                                    widget.movie.description ??
+                                        "No Description",
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  secondChild: Text(widget.movie.description ??
+                                      "No Description"),
+                                  crossFadeState: _isExpanded
+                                      ? CrossFadeState.showSecond
+                                      : CrossFadeState.showFirst,
+                                  duration: const Duration(milliseconds: 200),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    _isExpanded = !_isExpanded;
+                                  });
+                                },
+                                child: Text(
+                                  _isExpanded ? 'Show Less' : 'Show More',
+                                  style: const TextStyle(color: Colors.blue),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 8.sp),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.star,
+                                    color: Colors.yellow,
+                                    size: 21.sp,
+                                  ),
+                                  SizedBox(width: 10.0.w),
+                                  Text(
+                                    widget.movie.rating.toString(),
+                                    style: const TextStyle(fontSize: 18),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ]),
+                  ),
+                  CategorySection(
+                    title: "Most Like This",
+                    movies: [
+                      Movie(
+                          releaseDate: "2012",
+                          rating: 8.5,
+                          title: "Movie",
+                          imageUrl:
+                              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAS_m9Nxcvps_JexD3GgYob0Omkub3Fo1d4A&s"),
+                      Movie(
+                          releaseDate: "2012",
+                          rating: 8.5,
+                          title: "Movie",
+                          imageUrl:
+                              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAS_m9Nxcvps_JexD3GgYob0Omkub3Fo1d4A&s"),
+                      Movie(
+                          releaseDate: "2012",
+                          rating: 8.5,
+                          title: "Movie",
+                          imageUrl:
+                              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAS_m9Nxcvps_JexD3GgYob0Omkub3Fo1d4A&s"),
+                      Movie(
+                          releaseDate: "2012",
+                          rating: 8.5,
+                          title: "Movie",
+                          imageUrl:
+                              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAS_m9Nxcvps_JexD3GgYob0Omkub3Fo1d4A&s")
                     ],
-                  ),
-                  SizedBox(height: 3.0.h),
-                  const Text(
-                    'Description',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 2.0.h),
-                  AnimatedCrossFade(
-                    firstChild: Text(
-                      widget.movie.description ?? "No Description",
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    secondChild:
-                        Text(widget.movie.description ?? "No Description"),
-                    crossFadeState: _isExpanded
-                        ? CrossFadeState.showSecond
-                        : CrossFadeState.showFirst,
-                    duration: const Duration(milliseconds: 200),
-                  ),
-                  const SizedBox(height: 8.0),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _isExpanded = !_isExpanded;
-                      });
-                    },
-                    child: Text(
-                      _isExpanded ? 'Show Less' : 'Show More',
-                      style: const TextStyle(color: Colors.blue),
-                    ),
-                  ),
+                    withMoreInfoForMovieCard: true,
+                  )
                 ],
               ))
         ],
@@ -141,6 +213,6 @@ class CategoryText extends StatelessWidget {
           border: Border.all(color: Colors.grey),
         ),
         child:
-            Text(text, style: TextStyle(fontSize: 16.sp, color: Colors.grey)));
+            Text(text, style: TextStyle(fontSize: 13.sp, color: Colors.grey)));
   }
 }
