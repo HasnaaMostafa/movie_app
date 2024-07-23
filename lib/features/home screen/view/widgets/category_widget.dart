@@ -35,9 +35,18 @@ class CategorySection extends StatelessWidget {
               child: Row(
                 children: movies.map((movie) {
                   if (withMoreInfoForMovieCard ?? false) {
-                    return MovieCardRecommend(movie: movie);
+                    return MovieCardRecommend(
+                      movie: movie,
+                      onPress: () {
+                        print(movie.title);
+                      },
+                    );
                   } else {
-                    return MovieCard(movie: movie);
+                    return MovieCard(
+                        movie: movie,
+                        onPress: () {
+                          print(movie.title);
+                        });
                   }
                 }).toList(),
               ),

@@ -5,19 +5,22 @@ import 'package:movie_app/features/home%20screen/view/widgets/poster_widget.dart
 
 class MovieCard extends StatelessWidget {
   final Movie movie;
-
-  const MovieCard({super.key, required this.movie});
+  final Function()? onPress;
+  const MovieCard({super.key, required this.movie, this.onPress});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(5),
-        child: PosterWidget(
-          movie: movie,
-          width: 100.w,
-          height: 120.h,
+      child: GestureDetector(
+        onTap: onPress,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(5),
+          child: PosterWidget(
+            movie: movie,
+            width: 100.w,
+            height: 120.h,
+          ),
         ),
       ),
     );
