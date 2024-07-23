@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/features/authentication/register/presentation/views/register_view.dart';
+import 'package:movie_app/features/home%20screen/view/home_screen.dart';
 
 import 'custom_button.dart';
 import 'custom_text_field.dart';
@@ -66,7 +67,12 @@ class LoginViewBody extends StatelessWidget {
               height: 45,
               width: 150,
               text: "Sign in",
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => const HomeScreen()));
+              },
             ),
             const Spacer(
               flex: 2,

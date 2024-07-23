@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/features/authentication/login/presentation/views/login_view.dart';
 
+import '../../../../../home screen/view/home_screen.dart';
 import '../../../../login/presentation/views/widgets/custom_button.dart';
 import '../../../../login/presentation/views/widgets/custom_text_field.dart';
 
@@ -26,7 +27,7 @@ class RegisterViewBody extends StatelessWidget {
             ],
           ),
         ),
-        actions: [Text("")],
+        actions: const [Text("")],
       ),
       backgroundColor: const Color(0xff1d1d1d),
       body: Padding(
@@ -110,7 +111,12 @@ class RegisterViewBody extends StatelessWidget {
               height: 45,
               width: 150,
               text: "Sign up",
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => const HomeScreen()));
+              },
             ),
             const Spacer(
               flex: 2,

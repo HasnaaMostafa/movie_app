@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/features/home%20screen/view/home_screen.dart';
 
+import 'features/category/presentation/views/category_view.dart';
+
 class NavMenuScreen extends StatefulWidget {
   const NavMenuScreen({super.key});
 
@@ -17,10 +19,7 @@ class _NavMenuScreenState extends State<NavMenuScreen> {
       'Search Page',
       style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
     ),
-    Text(
-      'Categories',
-      style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
-    ),
+    CategoryScreen(),
     Text(
       'Watch List',
       style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
