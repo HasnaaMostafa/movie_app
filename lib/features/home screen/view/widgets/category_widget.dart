@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/core/models/movie.dart';
 import 'package:movie_app/features/home%20screen/view/widgets/movie_card.dart';
 import 'package:movie_app/features/home%20screen/view/widgets/movie_card_recommend.dart';
+import 'package:movie_app/features/movie%20screen/view/movie_info.dart';
 
 class CategorySection extends StatelessWidget {
   final String title;
@@ -45,6 +46,10 @@ class CategorySection extends StatelessWidget {
                     return MovieCard(
                         movie: movie,
                         onPress: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => MovieInfoScreen(
+                                    movie: movie,
+                                  )));
                           print(movie.title);
                         });
                   }

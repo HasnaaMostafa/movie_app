@@ -8,7 +8,6 @@ import 'package:movie_app/core/utils/text_theme.dart';
 class TAppTheme {
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
-    fontFamily: 'Poppins',
     colorScheme: ColorScheme.fromSeed(
       seedColor: const Color(0xFF007AFF),
       brightness: Brightness.light,
