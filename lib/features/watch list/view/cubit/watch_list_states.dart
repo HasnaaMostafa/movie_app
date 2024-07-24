@@ -1,11 +1,9 @@
-import 'package:equatable/equatable.dart';
 
 
-abstract class WatchListState extends Equatable {
+
+abstract class WatchListState  {
   const WatchListState();
 
-  @override
-  List<Object> get props => [];
 }
 
 class WatchListLoading extends WatchListState {}
@@ -23,6 +21,4 @@ class WatchListError extends WatchListState {
 
   const WatchListError(this.message);
 
-  @override
-  List<Object> get props => [message];
 }

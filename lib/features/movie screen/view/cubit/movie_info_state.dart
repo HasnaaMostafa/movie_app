@@ -1,7 +1,7 @@
-import 'package:equatable/equatable.dart';
+
 import 'package:movie_app/core/models/movie.dart';
 
-abstract class MovieInfoState extends Equatable {
+abstract class MovieInfoState   {
   const MovieInfoState();
 
   @override
