@@ -12,7 +12,7 @@ class HomeCubit extends Cubit<HomeState> {
     final bannerMovies = [
       Movie(
           description:
-              "This is a description of the movie 6 This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
+              "This is a description of the mdescription of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
           rating: 7.6,
           releaseDate: "2017",
           title: 'Guardians of the Galaxy Vol. 2',
@@ -20,7 +20,7 @@ class HomeCubit extends Cubit<HomeState> {
               'https://m.media-amazon.com/images/M/MV5BNjM0NTc0NzItM2FlYS00YzEwLWE0YmUtNTA2ZWIzODc2OTgxXkEyXkFqcGdeQXVyNTgwNzIyNzg@._V1_SX300.jpg'),
       Movie(
           description:
-              "This is a description of the movie 6 This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
+              "This is a description of the mption of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
           rating: 8.5,
           title: 'Movie 2',
           imageUrl:
@@ -44,7 +44,7 @@ class HomeCubit extends Cubit<HomeState> {
                     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAS_m9Nxcvps_JexD3GgYob0Omkub3Fo1d4A&s")
           ],
           description:
-              "This is a description of the movie 6 This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
+              "This is a description of hie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
           rating: 8.5,
           releaseDate: "1990",
           title: 'Movie 3',
@@ -66,7 +66,7 @@ class HomeCubit extends Cubit<HomeState> {
                     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAS_m9Nxcvps_JexD3GgYob0Omkub3Fo1d4A&s")
           ],
           description:
-              "This is a description of the movie 6 This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
+              "This is a description of the movovs is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
           rating: 8.5,
           releaseDate: "1990",
           title: 'Movie 4',
@@ -76,7 +76,7 @@ class HomeCubit extends Cubit<HomeState> {
     final recommendedMovies = [
       Movie(
           description:
-              "This is a description of the movie 6 This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
+              "This is a description of the mois is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
           rating: 8.92,
           releaseDate: "1990",
           title: 'Movie 5',
@@ -84,7 +84,7 @@ class HomeCubit extends Cubit<HomeState> {
               'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s'),
       Movie(
           description:
-              "This is a description of the movie 6 This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
+              "This is a description of the movie 6 This is a descriptmovie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
           rating: 4,
           releaseDate: "1990",
           title: 'Movie 6',
@@ -92,7 +92,7 @@ class HomeCubit extends Cubit<HomeState> {
               'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s'),
       Movie(
           description:
-              "This is a description of the movie 6 This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
+              "This is a description of the movie 6 This is an of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
           rating: 8.92,
           releaseDate: "1990",
           title: 'Movie 5',
@@ -100,7 +100,7 @@ class HomeCubit extends Cubit<HomeState> {
               'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s'),
       Movie(
           description:
-              "This is a description of the movie 6 This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
+              "This is a description of the movie 6 This ition of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
           rating: 4,
           releaseDate: "1990",
           title: 'Movie 6',
@@ -108,7 +108,7 @@ class HomeCubit extends Cubit<HomeState> {
               'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s'),
       Movie(
           description:
-              "This is a description of the movie 6 This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
+              "This is a description of the movie 6 Thicription of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
           rating: 8.92,
           releaseDate: "1990",
           title: 'Movie 5',
@@ -116,7 +116,7 @@ class HomeCubit extends Cubit<HomeState> {
               'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s'),
       Movie(
           description:
-              "This is a description of the movie 6 This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
+              "This is a description of the movie movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
           rating: 4,
           releaseDate: "1990",
           title: 'Movie 6',
