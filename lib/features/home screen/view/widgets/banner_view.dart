@@ -1,8 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/core/models/movie.dart';
-import 'dart:async';
-
 import 'package:movie_app/features/home%20screen/view/widgets/poster_widget.dart';
 
 class BannerView extends StatefulWidget {
@@ -84,7 +84,10 @@ class _BannerViewState extends State<BannerView> {
                             padding: EdgeInsets.only(top: 8.h),
                             child: Text(
                               widget.movies[index].title,
-                              style: Theme.of(context).textTheme.headlineLarge,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headlineMedium
+                                  ?.copyWith(fontSize: 15.sp),
                             ),
                           ),
                           Padding(
@@ -101,7 +104,7 @@ class _BannerViewState extends State<BannerView> {
                 ],
               ),
               Positioned(
-                bottom: 0,
+                bottom: 0.h,
                 left: 15.w,
                 child: PosterWidget(
                   movie: widget.movies[index],

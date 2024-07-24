@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
       designSize: MediaQuery.of(context).size,
       minTextAdapt: true,
       builder: (BuildContext context, Widget? child) => MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: TAppTheme.lightTheme,
         darkTheme: TAppTheme.darkTheme,
         home: const NavMenuScreen(),
