@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/features/home%20screen/view/home_screen.dart';
+import 'package:movie_app/features/watch%20list/view/watch_list_screen.dart';
 
 import 'features/category/presentation/views/category_view.dart';
 
@@ -13,17 +14,14 @@ class NavMenuScreen extends StatefulWidget {
 class _NavMenuScreenState extends State<NavMenuScreen> {
   int _selectedIndex = 0;
 
-  static const List<Widget> _widgetOptions = <Widget>[
-    HomeScreen(),
-    Text(
+  static final List<Widget> _widgetOptions = <Widget>[
+    const HomeScreen(),
+    const Text(
       'Search Page',
       style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
     ),
-    CategoryScreen(),
-    Text(
-      'Watch List',
-      style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
-    ),
+    const CategoryScreen(),
+    const Watchlist()
   ];
 
   void _onItemTapped(int index) {

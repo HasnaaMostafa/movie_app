@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/core/models/movie.dart';
 import 'package:movie_app/features/home%20screen/view/widgets/movie_card.dart';
 import 'package:movie_app/features/home%20screen/view/widgets/movie_card_recommend.dart';
+import 'package:movie_app/features/movie%20screen/view/cubit/movie_info_cubit.dart';
 import 'package:movie_app/features/movie%20screen/view/movie_info.dart';
 
 class CategorySection extends StatelessWidget {
@@ -21,7 +24,7 @@ class CategorySection extends StatelessWidget {
       color: Theme.of(context).brightness == Brightness.dark
           ? Colors.grey[850]
           : Colors.grey[200],
-      margin: const EdgeInsets.only(top: 20),
+      margin: EdgeInsets.only(top: 20.h),
       width: MediaQuery.of(context).size.width,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -39,10 +42,21 @@ class CategorySection extends StatelessWidget {
                     return MovieCardRecommend(
                       movie: movie,
                       onPress: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => MovieInfoScreen(
-                                  movie: movie,
-                                )));
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BlocProvider(
+                              create: (context) => MovieInfoCubit()
+                                ..loadMoviesByCategory(
+                                    movie.categories.isNotEmpty
+                                        ? movie.categories[0].name
+                                        : "Action"),
+                              child: MovieInfoScreen(
+                                movie: movie,
+                              ),
+                            ),
+                          ),
+                        );
                         print(movie.title);
                       },
                     );
@@ -50,10 +64,21 @@ class CategorySection extends StatelessWidget {
                     return MovieCard(
                         movie: movie,
                         onPress: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => MovieInfoScreen(
-                                    movie: movie,
-                                  )));
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => BlocProvider(
+                                create: (context) => MovieInfoCubit()
+                                  ..loadMoviesByCategory(
+                                      movie.categories.isNotEmpty
+                                          ? movie.categories[0].name
+                                          : "Action"),
+                                child: MovieInfoScreen(
+                                  movie: movie,
+                                ),
+                              ),
+                            ),
+                          );
                           print(movie.title);
                         });
                   }
