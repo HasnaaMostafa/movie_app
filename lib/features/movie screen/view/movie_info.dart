@@ -1,9 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/core/models/movie.dart';
 import 'package:movie_app/features/home%20screen/view/widgets/category_widget.dart';
 import 'package:movie_app/features/home%20screen/view/widgets/poster_widget.dart';
+import 'package:movie_app/features/movie%20screen/view/cubit/movie_info_cubit.dart';
+import 'package:movie_app/features/movie%20screen/view/cubit/movie_info_state.dart';
+import 'package:movie_app/features/movie%20screen/view/widgets/related_movies_category_widget.dart';
 
 class MovieInfoScreen extends StatefulWidget {
   final Movie movie;
@@ -160,38 +164,9 @@ class _MovieInfoScreenState extends State<MovieInfoScreen> {
                       ),
                     ]),
                   ),
-                  CategorySection(
-                    title: "Most Like This",
-                    movies: [
-                      Movie(
-                          releaseDate: "2012",
-                          rating: 8.5,
-                          title: "Movie",
-                          imageUrl:
-                              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAS_m9Nxcvps_JexD3GgYob0Omkub3Fo1d4A&s"),
-                      Movie(
-                          releaseDate: "2012",
-                          rating: 8.5,
-                          title: "Movie",
-                          imageUrl:
-                              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAS_m9Nxcvps_JexD3GgYob0Omkub3Fo1d4A&s"),
-                      Movie(
-                          releaseDate: "2012",
-                          rating: 8.5,
-                          title: "Movie",
-                          imageUrl:
-                              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAS_m9Nxcvps_JexD3GgYob0Omkub3Fo1d4A&s"),
-                      Movie(
-                          releaseDate: "2012",
-                          rating: 8.5,
-                          title: "Movie",
-                          imageUrl:
-                              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAS_m9Nxcvps_JexD3GgYob0Omkub3Fo1d4A&s")
-                    ],
-                    withMoreInfoForMovieCard: true,
-                  )
                 ],
-              ))
+              )),
+          const MoviesByCategoryWidget()
         ],
       ),
     );
