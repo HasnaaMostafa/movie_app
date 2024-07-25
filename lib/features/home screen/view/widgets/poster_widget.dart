@@ -29,6 +29,11 @@ class PosterWidget extends StatelessWidget {
                   onTap: () {
                     if (WatchListRepository.movies.isEmpty) {
                       WatchListRepository.movies.add(movie);
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text('Movie added to watchlist'),
+                        duration: Duration(seconds: 1),
+                      ));
+                      return;
                     }
                     for (var i = 0;
                         i < WatchListRepository.movies.length;
@@ -39,6 +44,12 @@ class PosterWidget extends StatelessWidget {
                       }
                       if (i == WatchListRepository.movies.length - 1) {
                         WatchListRepository.movies.add(movie);
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content:
+                              Text('${movie.title} Movie added to watchlist'),
+                          duration: const Duration(seconds: 1),
+                        ));
+                        return;
                       }
                     }
                   },
