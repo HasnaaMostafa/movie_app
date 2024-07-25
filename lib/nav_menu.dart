@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/features/home%20screen/view/home_screen.dart';
+import 'package:movie_app/features/search%20screen/view/search_screen.dart';
 import 'package:movie_app/features/watch%20list/view/watch_list_screen.dart';
 
 import 'features/category/presentation/views/category_view.dart';
@@ -16,10 +17,7 @@ class _NavMenuScreenState extends State<NavMenuScreen> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     const HomeScreen(),
-    const Text(
-      'Search Page',
-      style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
-    ),
+    SearchScreen(),
     const CategoryScreen(),
     const Watchlist()
   ];
