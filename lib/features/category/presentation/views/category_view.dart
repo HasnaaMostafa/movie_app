@@ -12,7 +12,7 @@ class CategoryScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: const Text(
-          "Category",
+          "Categories",
           style: TextStyle(fontSize: 20),
         ),
         centerTitle: true,
