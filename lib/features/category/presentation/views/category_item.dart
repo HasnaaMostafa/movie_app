@@ -17,7 +17,18 @@ class CategoryItem extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          Image(image: AssetImage(appCategory.imageUrl)),
+          SizedBox(
+              width: double.infinity,
+              height: double.infinity,
+              child: Image(
+                image: NetworkImage(
+                  appCategory.imageUrl,
+                ),
+                fit: BoxFit.cover,
+              )),
+          Container(
+            color: Colors.black.withOpacity(0.5),
+          ),
           Text(
             appCategory.name,
             style: const TextStyle(
