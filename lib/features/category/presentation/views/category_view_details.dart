@@ -36,6 +36,7 @@ class CategoryViewDetails extends StatelessWidget {
                           children: [
                             CategoryItem(
                               appCategory: AppCategory(
+                                id: 2,
                                 name: "",
                                 imageUrl: "assets/images/film.jpeg",
                               ),

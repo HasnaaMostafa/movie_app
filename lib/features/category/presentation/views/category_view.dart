@@ -39,6 +39,7 @@ class CategoryScreen extends StatelessWidget {
                       },
                       child: CategoryItem(
                         appCategory: AppCategory(
+                            id: 2,
                             imageUrl: "assets/images/movie.jpeg",
                             name: "Family"),
                       ),
