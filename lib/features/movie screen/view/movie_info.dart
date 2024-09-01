@@ -1,12 +1,8 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/core/models/movie.dart';
-import 'package:movie_app/features/home%20screen/view/widgets/category_widget.dart';
 import 'package:movie_app/features/home%20screen/view/widgets/poster_widget.dart';
-import 'package:movie_app/features/movie%20screen/view/cubit/movie_info_cubit.dart';
-import 'package:movie_app/features/movie%20screen/view/cubit/movie_info_state.dart';
+import 'package:movie_app/features/movie%20screen/view/widgets/category_text.dart';
 import 'package:movie_app/features/movie%20screen/view/widgets/related_movies_category_widget.dart';
 
 class MovieInfoScreen extends StatefulWidget {
@@ -15,14 +11,15 @@ class MovieInfoScreen extends StatefulWidget {
   const MovieInfoScreen({super.key, required this.movie});
 
   @override
-  _MovieInfoScreenState createState() => _MovieInfoScreenState();
+  MovieInfoScreenState createState() => MovieInfoScreenState();
 }
 
-class _MovieInfoScreenState extends State<MovieInfoScreen> {
+class MovieInfoScreenState extends State<MovieInfoScreen> {
   bool _isExpanded = false;
 
   @override
   Widget build(BuildContext context) {
+    print(widget.movie.id);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -38,7 +35,7 @@ class _MovieInfoScreenState extends State<MovieInfoScreen> {
             width: 1.sw,
             child: Stack(
               children: [
-                Image.network(widget.movie.imageUrl,
+                Image.network(widget.movie.backgroundUrl ?? "https://img.freepik.com/free-photo/gray-grunge-surface-wall-texture-background_1017-18216.jpg",
                     height: 240.h, width: 1.sw, fit: BoxFit.cover),
                 Container(
                   color: Colors.black.withOpacity(0.4),
@@ -117,7 +114,7 @@ class _MovieInfoScreenState extends State<MovieInfoScreen> {
                                   firstChild: Text(
                                     widget.movie.description ??
                                         "No Description",
-                                    maxLines: 2,
+                                    maxLines: 3,
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                   secondChild: Text(widget.movie.description ??
@@ -174,21 +171,4 @@ class _MovieInfoScreenState extends State<MovieInfoScreen> {
   }
 }
 
-class CategoryText extends StatelessWidget {
-  const CategoryText({
-    super.key,
-    required this.text,
-  });
-  final String text;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        padding: EdgeInsets.symmetric(horizontal: 18.0.w, vertical: 6.0.h),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          border: Border.all(color: Colors.grey),
-        ),
-        child:
-            Text(text, style: TextStyle(fontSize: 13.sp, color: Colors.grey)));
-  }
-}
+
