@@ -1,5 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/core/network/end_points.dart';
 import 'package:movie_app/core/models/app_category.dart';
+import 'package:movie_app/core/network/dio_network.dart';
 import 'package:movie_app/features/home%20screen/cubits/home_state.dart';
 import 'package:movie_app/core/models/movie.dart';
 
@@ -8,9 +10,10 @@ class HomeCubit extends Cubit<HomeState> {
 
   Future<void> fetchMovies() async {
     await Future.delayed(const Duration(seconds: 3));
+
     // Example data
     final bannerMovies = [
-      Movie(
+      Movie(id:533535,
           description:
               "This is a description of the mdescription of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
           rating: 7.6,
@@ -18,7 +21,7 @@ class HomeCubit extends Cubit<HomeState> {
           title: 'Guardians of the Galaxy Vol. 2',
           imageUrl:
               'https://m.media-amazon.com/images/M/MV5BNjM0NTc0NzItM2FlYS00YzEwLWE0YmUtNTA2ZWIzODc2OTgxXkEyXkFqcGdeQXVyNTgwNzIyNzg@._V1_SX300.jpg'),
-      Movie(
+      Movie(id:533535,
           description:
               "This is a description of the mption of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
           rating: 8.5,
@@ -27,54 +30,55 @@ class HomeCubit extends Cubit<HomeState> {
               'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s',
           releaseDate: '1990'),
     ];
-    final popularMovies = [
-      Movie(
-          categories: [
-            AppCategory(
-                name: "Action",
-                imageUrl:
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAS_m9Nxcvps_JexD3GgYob0Omkub3Fo1d4A&s"),
-            AppCategory(
-                name: "Action",
-                imageUrl:
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAS_m9Nxcvps_JexD3GgYob0Omkub3Fo1d4A&s"),
-            AppCategory(
-                name: "Action",
-                imageUrl:
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAS_m9Nxcvps_JexD3GgYob0Omkub3Fo1d4A&s")
-          ],
-          description:
-              "This is a description of hie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
-          rating: 8.5,
-          releaseDate: "1990",
-          title: 'Movie 3',
-          imageUrl:
-              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s'),
-      Movie(
-          categories: [
-            AppCategory(
-                name: "Action",
-                imageUrl:
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAS_m9Nxcvps_JexD3GgYob0Omkub3Fo1d4A&s"),
-            AppCategory(
-                name: "Action",
-                imageUrl:
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAS_m9Nxcvps_JexD3GgYob0Omkub3Fo1d4A&s"),
-            AppCategory(
-                name: "Action",
-                imageUrl:
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAS_m9Nxcvps_JexD3GgYob0Omkub3Fo1d4A&s")
-          ],
-          description:
-              "This is a description of the movovs is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
-          rating: 8.5,
-          releaseDate: "1990",
-          title: 'Movie 4',
-          imageUrl:
-              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s'),
-    ];
+    final popularMovies = await featchingBannerMovies();
+    // [
+    //   Movie(
+    //       categories: [
+    //         AppCategory(
+    //             name: "Action",
+    //             imageUrl:
+    //                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAS_m9Nxcvps_JexD3GgYob0Omkub3Fo1d4A&s"),
+    //         AppCategory(
+    //             name: "Action",
+    //             imageUrl:
+    //                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAS_m9Nxcvps_JexD3GgYob0Omkub3Fo1d4A&s"),
+    //         AppCategory(
+    //             name: "Action",
+    //             imageUrl:
+    //                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAS_m9Nxcvps_JexD3GgYob0Omkub3Fo1d4A&s")
+    //       ],
+    //       description:
+    //           "This is a description of hie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
+    //       rating: 8.5,
+    //       releaseDate: "1990",
+    //       title: 'Movie 3',
+    //       imageUrl:
+    //           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s'),
+    //   Movie(
+    //       categories: [
+    //         AppCategory(
+    //             name: "Action",
+    //             imageUrl:
+    //                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAS_m9Nxcvps_JexD3GgYob0Omkub3Fo1d4A&s"),
+    //         AppCategory(
+    //             name: "Action",
+    //             imageUrl:
+    //                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAS_m9Nxcvps_JexD3GgYob0Omkub3Fo1d4A&s"),
+    //         AppCategory(
+    //             name: "Action",
+    //             imageUrl:
+    //                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAS_m9Nxcvps_JexD3GgYob0Omkub3Fo1d4A&s")
+    //       ],
+    //       description:
+    //           "This is a description of the movovs is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
+    //       rating: 8.5,
+    //       releaseDate: "1990",
+    //       title: 'Movie 4',
+    //       imageUrl:
+    //           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s'),
+    // ];
     final recommendedMovies = [
-      Movie(
+      Movie(id:533535,
           description:
               "This is a description of the mois is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
           rating: 8.92,
@@ -82,7 +86,7 @@ class HomeCubit extends Cubit<HomeState> {
           title: 'Movie 5',
           imageUrl:
               'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s'),
-      Movie(
+      Movie(id:533535,
           description:
               "This is a description of the movie 6 This is a descriptmovie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
           rating: 4,
@@ -90,7 +94,7 @@ class HomeCubit extends Cubit<HomeState> {
           title: 'Movie 6',
           imageUrl:
               'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s'),
-      Movie(
+      Movie(id:533535,
           description:
               "This is a description of the movie 6 This is an of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
           rating: 8.92,
@@ -98,7 +102,7 @@ class HomeCubit extends Cubit<HomeState> {
           title: 'Movie 5',
           imageUrl:
               'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s'),
-      Movie(
+      Movie(id:533535,
           description:
               "This is a description of the movie 6 This ition of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
           rating: 4,
@@ -106,7 +110,7 @@ class HomeCubit extends Cubit<HomeState> {
           title: 'Movie 6',
           imageUrl:
               'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s'),
-      Movie(
+      Movie(id:533535,
           description:
               "This is a description of the movie 6 Thicription of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
           rating: 8.92,
@@ -114,7 +118,7 @@ class HomeCubit extends Cubit<HomeState> {
           title: 'Movie 5',
           imageUrl:
               'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s'),
-      Movie(
+      Movie(id:533535,
           description:
               "This is a description of the movie movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
           rating: 4,
@@ -124,6 +128,19 @@ class HomeCubit extends Cubit<HomeState> {
               'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s'),
     ];
     emit(HomeLoaded(bannerMovies, popularMovies, recommendedMovies));
-    print("oooo");
   }
+}
+
+// featch data
+Future<List<Movie>> featchingBannerMovies() async {
+  DioApiService dioApiService = DioApiService();
+  final response = await dioApiService.getRequest(EndPoints.popular);
+  List<Movie> movies = [];
+  if (response.statusCode == 200) {
+    final data = response.data;
+    data['results'].forEach((movie) {
+      movies.add(Movie.fromJson(movie));
+    });
+  }
+  return movies;
 }
