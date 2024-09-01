@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/core/models/movie.dart';
 import 'package:movie_app/features/home%20screen/view/widgets/movie_card.dart';
 import 'package:movie_app/features/home%20screen/view/widgets/movie_card_recommend.dart';
-import 'package:movie_app/features/movie%20screen/view/cubit/movie_info_cubit.dart';
+import 'package:movie_app/features/movie%20screen/cubit/movie_info_cubit.dart';
 import 'package:movie_app/features/movie%20screen/view/movie_info.dart';
 
 class CategorySection extends StatelessWidget {

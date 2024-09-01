@@ -9,7 +9,7 @@ class EndPoints {
   static String similar(int movieId) => '/3/movie/$movieId/similar?api_key=$apiKey';
   static const String movieList = '/3/genre/movie/list';
   static const String discoverMovie = '/3/discover/movie';
-  static String search (String query,int page)=> '/3/search/movie?query=$query&include_adult=false&language=en-US&page=$page';
+  static String search (String query,int page)=> '/3/search/movie?query=$query&include_adult=false&language=en-US&page=$page&api_key=$apiKey';
 }
 
 

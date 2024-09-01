@@ -113,7 +113,7 @@ class MovieInfoScreenState extends State<MovieInfoScreen> {
                                   firstChild: Text(
                                     widget.movie.description ??
                                         "No Description",
-                                    maxLines: 3,
+                                    maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                   secondChild: Text(widget.movie.description ??

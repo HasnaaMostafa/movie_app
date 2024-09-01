@@ -2,7 +2,7 @@ import 'package:movie_app/core/models/movie.dart';
 import 'package:movie_app/core/network/dio_network.dart';
 import 'package:movie_app/core/network/end_points.dart';
 
-class MovieRepository {
+class MovieViewModel {
   static Future<List<Movie>> getSimilarMovies(int movieId) async {
     // await Future.delayed(const Duration(seconds: 2));
     DioApiService dioApiService = DioApiService();
