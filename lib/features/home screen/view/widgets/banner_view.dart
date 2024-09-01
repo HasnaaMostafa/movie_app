@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/core/models/movie.dart';
@@ -17,29 +16,41 @@ class BannerView extends StatefulWidget {
 class BannerViewState extends State<BannerView> {
   late PageController _controller;
   int _currentPage = 0;
+  bool _isForward = true; // Track the scroll direction
+  Timer? _timer;
 
   @override
   void initState() {
     super.initState();
     _controller = PageController(initialPage: 0);
 
-    Timer.periodic(const Duration(seconds: 2), (Timer timer) {
-      if (_currentPage < widget.movies.length - 1) {
+    _timer = Timer.periodic(const Duration(seconds: 2), (Timer timer) {
+      if (!mounted) {
+        timer.cancel();
+        return;
+      }
+      if (_currentPage == widget.movies.length - 1) {
+        _isForward = false;
+      } else if (_currentPage == 0) {
+        _isForward = true;
+      }
+      if (_isForward) {
         _currentPage++;
       } else {
-        _currentPage = 0;
+        _currentPage--;
       }
 
       _controller.animateToPage(
         _currentPage,
         duration: const Duration(milliseconds: 600),
-        curve: Curves.easeIn,
+        curve: Curves.easeInOut,
       );
     });
   }
 
   @override
   void dispose() {
+    _timer?.cancel();
     _controller.dispose();
     super.dispose();
   }
@@ -122,3 +133,6 @@ class BannerViewState extends State<BannerView> {
     );
   }
 }
+
+
+
