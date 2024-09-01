@@ -21,7 +21,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   Future<void> searchMovies(String query) async {
     movies = [
-      Movie(
+      Movie(id:533535,
           description:
               "This is a description of the mois is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
           rating: 8.92,
@@ -29,7 +29,7 @@ class _SearchScreenState extends State<SearchScreen> {
           title: 'Movie 5',
           imageUrl:
               'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s'),
-      Movie(
+      Movie(id:533535,
           description:
               "This is a description of the movie 6 This is a descriptmovie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
           rating: 4,
@@ -37,7 +37,7 @@ class _SearchScreenState extends State<SearchScreen> {
           title: 'Movie 6',
           imageUrl:
               'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s'),
-      Movie(
+      Movie(id:533535,
           description:
               "This is a description of the movie 6 This is an of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
           rating: 8.92,
@@ -45,7 +45,7 @@ class _SearchScreenState extends State<SearchScreen> {
           title: 'Movie 5',
           imageUrl:
               'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s'),
-      Movie(
+      Movie(id:533535,
           description:
               "This is a description of the movie 6 This ition of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
           rating: 4,
@@ -53,7 +53,7 @@ class _SearchScreenState extends State<SearchScreen> {
           title: 'Movie 6',
           imageUrl:
               'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s'),
-      Movie(
+      Movie(id:533535,
           description:
               "This is a description of the movie 6 Thicription of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
           rating: 8.92,
@@ -61,7 +61,7 @@ class _SearchScreenState extends State<SearchScreen> {
           title: 'Movie 5',
           imageUrl:
               'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s'),
-      Movie(
+      Movie(id:533535,
           description:
               "This is a description of the movie movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
           rating: 4,
@@ -136,10 +136,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                 MaterialPageRoute(
                                   builder: (context) => BlocProvider(
                                     create: (context) => MovieInfoCubit()
-                                      ..loadMoviesByCategory(
-                                          movies[index].categories.isNotEmpty
-                                              ? movies[index].categories[0].name
-                                              : "Action"),
+                                      ..loadSimilarMovies(movies[index].id),
                                     child: MovieInfoScreen(
                                       movie: movies[index],
                                     ),
