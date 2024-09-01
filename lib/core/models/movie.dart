@@ -1,9 +1,9 @@
 import 'package:movie_app/core/models/app_category.dart';
 
 class Movie {
-  final int id ;
+  final int id;
   final String title;
-  final String imageUrl;
+  final String? imageUrl;
   final String releaseDate;
   final double rating;
   final String? description;
@@ -16,7 +16,7 @@ class Movie {
       required this.releaseDate,
       required this.rating,
       required this.title,
-      required this.imageUrl,
+      this.imageUrl,
       this.description});
 
   // Factory constructor to create a Movie instance from JSON data
@@ -37,8 +37,12 @@ class Movie {
     return Movie(
       id: json['id'],
       title: json['title'],
-      imageUrl: 'https://image.tmdb.org/t/p/w500${json['poster_path']}',
-      backgroundUrl: 'https://image.tmdb.org/t/p/w500${json['backdrop_path']}',
+      imageUrl: json['poster_path'] != null
+          ? 'https://image.tmdb.org/t/p/w500${json['poster_path']}'
+          : "https://img.freepik.com/free-photo/gray-grunge-surface-wall-texture-background_1017-18216.jpg",
+      backgroundUrl: json['backdrop_path'] != null
+          ? 'https://image.tmdb.org/t/p/w500${json['backdrop_path']}'
+          : "https://img.freepik.com/free-photo/gray-grunge-surface-wall-texture-background_1017-18216.jpg",
       releaseDate: json['release_date'],
       rating: (json['vote_average'] as num).toDouble(),
       description: json['overview'],

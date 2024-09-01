@@ -4,6 +4,7 @@ class EndPoints {
   static String popular = '/3/movie/popular?api_key=$apiKey';
   static const String newRelease = '/3/movie/upcoming';
   static const String recommended = '/3/movie/top_rated';
+  static  String trending = '/3/trending/movie/day?api_key=$apiKey';
   static const String details = '/3/movie';
   static String similar(int movieId) => '/3/movie/$movieId/similar?api_key=$apiKey';
   static const String movieList = '/3/genre/movie/list';

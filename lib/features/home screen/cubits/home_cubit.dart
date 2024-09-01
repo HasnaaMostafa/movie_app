@@ -12,24 +12,7 @@ class HomeCubit extends Cubit<HomeState> {
     await Future.delayed(const Duration(seconds: 3));
 
     // Example data
-    final bannerMovies = [
-      Movie(id:533535,
-          description:
-              "This is a description of the mdescription of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
-          rating: 7.6,
-          releaseDate: "2017",
-          title: 'Guardians of the Galaxy Vol. 2',
-          imageUrl:
-              'https://m.media-amazon.com/images/M/MV5BNjM0NTc0NzItM2FlYS00YzEwLWE0YmUtNTA2ZWIzODc2OTgxXkEyXkFqcGdeQXVyNTgwNzIyNzg@._V1_SX300.jpg'),
-      Movie(id:533535,
-          description:
-              "This is a description of the mption of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
-          rating: 8.5,
-          title: 'Movie 2',
-          imageUrl:
-              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s',
-          releaseDate: '1990'),
-    ];
+    final bannerMovies = await featchingPopularMovies();
     final popularMovies = await featchingBannerMovies();
     // [
     //   Movie(
@@ -132,9 +115,22 @@ class HomeCubit extends Cubit<HomeState> {
 }
 
 // featch data
-Future<List<Movie>> featchingBannerMovies() async {
+Future<List<Movie>> featchingPopularMovies() async {
   DioApiService dioApiService = DioApiService();
   final response = await dioApiService.getRequest(EndPoints.popular);
+  List<Movie> movies = [];
+  if (response.statusCode == 200) {
+    final data = response.data;
+    data['results'].forEach((movie) {
+      movies.add(Movie.fromJson(movie));
+    });
+  }
+  return movies;
+}
+// featch data
+Future<List<Movie>> featchingBannerMovies() async {
+  DioApiService dioApiService = DioApiService();
+  final response = await dioApiService.getRequest(EndPoints.trending);
   List<Movie> movies = [];
   if (response.statusCode == 200) {
     final data = response.data;

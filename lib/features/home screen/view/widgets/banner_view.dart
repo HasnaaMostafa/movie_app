@@ -32,7 +32,7 @@ class _BannerViewState extends State<BannerView> {
 
       _controller.animateToPage(
         _currentPage,
-        duration: const Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 600),
         curve: Curves.easeIn,
       );
     });
@@ -59,7 +59,8 @@ class _BannerViewState extends State<BannerView> {
                   Stack(
                     children: [
                       Image.network(
-                        widget.movies[index].imageUrl,
+                        widget.movies[index].backgroundUrl ??
+                            "https://img.freepik.com/free-photo/gray-grunge-surface-wall-texture-background_1017-18216.jpg",
                         fit: BoxFit.fitWidth,
                         alignment: Alignment.center,
                         height: 200.h,
@@ -83,7 +84,9 @@ class _BannerViewState extends State<BannerView> {
                           Padding(
                             padding: EdgeInsets.only(top: 8.h),
                             child: Text(
-                              widget.movies[index].title,
+                              widget.movies[index].title.length > 30
+                                  ? '${widget.movies[index].title.substring(0, 30)}...'
+                                  : widget.movies[index].title,
                               style: Theme.of(context)
                                   .textTheme
                                   .headlineMedium

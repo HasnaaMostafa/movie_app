@@ -21,7 +21,7 @@ class PosterWidget extends StatelessWidget {
             SizedBox(
                 width: width ?? 100.w,
                 height: height ?? 120.h,
-                child: Image.network(movie.imageUrl, fit: BoxFit.cover)),
+                child: Image.network(movie.imageUrl??"https://png.pngtree.com/thumb_back/fh260/background/20200803/pngtree-abstract-grey-gradient-background-image_382062.jpg", fit: BoxFit.cover)),
             Positioned(
                 left: -8,
                 top: -5,
