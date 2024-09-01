@@ -6,7 +6,7 @@ import 'package:movie_app/features/home%20screen/view/widgets/poster_widget.dart
 class MovieCardRecommend extends StatelessWidget {
   final Movie movie;
   final Function()? onPress;
-  const MovieCardRecommend({super.key, required this.movie,  this.onPress});
+  const MovieCardRecommend({super.key, required this.movie, this.onPress});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,9 @@ class MovieCardRecommend extends StatelessWidget {
               ],
             ),
             Text(
-              movie.title,
+              movie.title.length > 15
+                  ? "${movie.title.substring(0, 15)}.."
+                  : movie.title,
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             Text(
