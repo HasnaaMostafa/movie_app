@@ -11,10 +11,10 @@ class BannerView extends StatefulWidget {
   const BannerView({super.key, required this.movies});
 
   @override
-  _BannerViewState createState() => _BannerViewState();
+  BannerViewState createState() => BannerViewState();
 }
 
-class _BannerViewState extends State<BannerView> {
+class BannerViewState extends State<BannerView> {
   late PageController _controller;
   int _currentPage = 0;
 

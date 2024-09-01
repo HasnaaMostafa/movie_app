@@ -8,10 +8,8 @@ class MovieRepository {
     DioApiService dioApiService = DioApiService();
     var response = await dioApiService.getRequest(EndPoints.similar(movieId));
     List<Movie> movies = [];
-    print(response.statusMessage);
     if (response.statusCode == 200) {
       final data = response.data;
-    print(data);
       data['results'].forEach((movie) {
         movies.add(Movie.fromJson(movie));
       });

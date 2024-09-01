@@ -4,11 +4,11 @@ import 'package:movie_app/core/models/movie.dart';
 import 'package:movie_app/features/watch%20list/view/cubit/model/watch_list_repo.dart';
 
 class PosterWidget extends StatelessWidget {
-  PosterWidget({super.key, required this.movie, this.width, this.height});
+  const PosterWidget({super.key, required this.movie, this.width, this.height});
 
   final Movie movie;
-  double? width;
-  double? height;
+  final double? width;
+  final double? height;
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -21,7 +21,10 @@ class PosterWidget extends StatelessWidget {
             SizedBox(
                 width: width ?? 100.w,
                 height: height ?? 120.h,
-                child: Image.network(movie.imageUrl??"https://png.pngtree.com/thumb_back/fh260/background/20200803/pngtree-abstract-grey-gradient-background-image_382062.jpg", fit: BoxFit.cover)),
+                child: Image.network(
+                    movie.imageUrl ??
+                        "https://png.pngtree.com/thumb_back/fh260/background/20200803/pngtree-abstract-grey-gradient-background-image_382062.jpg",
+                    fit: BoxFit.cover)),
             Positioned(
                 left: -8,
                 top: -5,

@@ -55,7 +55,7 @@ class CategorySection extends StatelessWidget {
                             ),
                           ),
                         );
-                        print(movie.title);
+                        // print(movie.title);
                       },
                     );
                   } else {

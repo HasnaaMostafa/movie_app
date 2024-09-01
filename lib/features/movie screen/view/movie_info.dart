@@ -19,7 +19,6 @@ class MovieInfoScreenState extends State<MovieInfoScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.movie.id);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(

@@ -9,15 +9,15 @@ class NavMenuScreen extends StatefulWidget {
   const NavMenuScreen({super.key});
 
   @override
-  _NavMenuScreenState createState() => _NavMenuScreenState();
+  NavMenuScreenState createState() => NavMenuScreenState();
 }
 
-class _NavMenuScreenState extends State<NavMenuScreen> {
+class NavMenuScreenState extends State<NavMenuScreen> {
   int _selectedIndex = 0;
 
   static final List<Widget> _widgetOptions = <Widget>[
     const HomeScreen(),
-    SearchScreen(),
+    const SearchScreen(),
     const CategoryScreen(),
     const Watchlist()
   ];

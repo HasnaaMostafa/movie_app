@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:movie_app/core/models/movie.dart';
 import 'package:movie_app/features/movie%20screen/view/cubit/movie_info_cubit.dart';
 import 'package:movie_app/features/movie%20screen/view/movie_info.dart';
@@ -11,10 +9,10 @@ class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
 
   @override
-  _SearchScreenState createState() => _SearchScreenState();
+  SearchScreenState createState() => SearchScreenState();
 }
 
-class _SearchScreenState extends State<SearchScreen> {
+class SearchScreenState extends State<SearchScreen> {
   String query = '';
   List<Movie> movies = [];
   bool isLoading = false;

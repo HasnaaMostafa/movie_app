@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/network/end_points.dart';
-import 'package:movie_app/core/models/app_category.dart';
 import 'package:movie_app/core/network/dio_network.dart';
 import 'package:movie_app/features/home%20screen/cubits/home_state.dart';
 import 'package:movie_app/core/models/movie.dart';
