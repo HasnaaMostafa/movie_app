@@ -42,15 +42,13 @@ class CategorySection extends StatelessWidget {
                     return MovieCardRecommend(
                       movie: movie,
                       onPress: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                             builder: (context) => BlocProvider(
                               create: (context) => MovieInfoCubit()
-                                ..loadMoviesByCategory(
-                                    movie.categories.isNotEmpty
-                                        ? movie.categories[0].name
-                                        : "Action"),
+                                ..loadSimilarMovies(
+                                    movie.id),
                               child: MovieInfoScreen(
                                 movie: movie,
                               ),
@@ -69,17 +67,14 @@ class CategorySection extends StatelessWidget {
                             MaterialPageRoute(
                               builder: (context) => BlocProvider(
                                 create: (context) => MovieInfoCubit()
-                                  ..loadMoviesByCategory(
-                                      movie.categories.isNotEmpty
-                                          ? movie.categories[0].name
-                                          : "Action"),
+                                ..loadSimilarMovies(
+                                    movie.id),
                                 child: MovieInfoScreen(
                                   movie: movie,
                                 ),
                               ),
                             ),
                           );
-                          print(movie.title);
                         });
                   }
                 }).toList(),
