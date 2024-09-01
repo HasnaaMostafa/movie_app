@@ -16,7 +16,7 @@ class BannerView extends StatefulWidget {
 class BannerViewState extends State<BannerView> {
   late PageController _controller;
   int _currentPage = 0;
-  bool _isForward = true; // Track the scroll direction
+  bool _isForward = true;
   Timer? _timer;
 
   @override
