@@ -59,7 +59,7 @@ class PosterWidget extends StatelessWidget {
                   child: const Icon(
                     size: 40,
                     Icons.bookmark_add,
-                    color: Colors.black38,
+                    color: Colors.white,
                   ),
                 )),
           ],
