@@ -95,8 +95,8 @@ class BannerViewState extends State<BannerView> {
                           Padding(
                             padding: EdgeInsets.only(top: 8.h),
                             child: Text(
-                              widget.movies[index].title.length > 30
-                                  ? '${widget.movies[index].title.substring(0, 30)}...'
+                              widget.movies[index].title.length > 25
+                                  ? '${widget.movies[index].title.substring(0, 25)}...'
                                   : widget.movies[index].title,
                               style: Theme.of(context)
                                   .textTheme
@@ -133,6 +133,3 @@ class BannerViewState extends State<BannerView> {
     );
   }
 }
-
-
-

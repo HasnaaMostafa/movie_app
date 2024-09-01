@@ -75,10 +75,17 @@ class SearchScreenState extends State<SearchScreen> {
                     );
                   } else if (state is SearchFailed) {
                     return Center(
-                      child: Text('Failed to load movies: ${state.message}'),
+                      child: Text(
+                        'No results found for $query with erorr: ${state.message}',
+                        style: const TextStyle(fontSize: 14),
+                      ),
                     );
                   } else {
-                    return const Center(child: Text('Start searching for movies!'));
+                    return const Center(
+                        child: Text(
+                      'find your favorite movie',
+                      style: TextStyle(fontSize: 14),
+                    ));
                   }
                 },
               ),
@@ -89,4 +96,3 @@ class SearchScreenState extends State<SearchScreen> {
     );
   }
 }
-

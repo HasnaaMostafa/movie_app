@@ -1,4 +1,5 @@
-import 'package:movie_app/core/constant/api_constants.dart' show categoriesMapNames;
+import 'package:movie_app/core/constant/api_constants.dart'
+    show categoriesMapNames;
 import 'package:movie_app/core/models/app_category.dart';
 
 class Movie {
@@ -37,20 +38,19 @@ class Movie {
 
     return Movie(
       id: json['id'],
-      title: json['title'],
+      title: json['title'] ?? "No titile",
       imageUrl: json['poster_path'] != null
           ? 'https://image.tmdb.org/t/p/w500${json['poster_path']}'
           : "https://img.freepik.com/free-photo/gray-grunge-surface-wall-texture-background_1017-18216.jpg",
       backgroundUrl: json['backdrop_path'] != null
           ? 'https://image.tmdb.org/t/p/w500${json['backdrop_path']}'
           : "https://img.freepik.com/free-photo/gray-grunge-surface-wall-texture-background_1017-18216.jpg",
-      releaseDate: json['release_date'],
-      rating: (json['vote_average'] as num).toDouble(),
+      releaseDate: json['release_date'] ?? "No release date",
+      rating: json['vote_average'] != null
+          ? (json['vote_average'] as num).toDouble()
+          : 0.0,
       description: json['overview'],
       categories: categories,
     );
   }
 }
-
-
-
