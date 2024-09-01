@@ -10,9 +10,9 @@ import 'package:movie_app/features/movie%20screen/view/movie_info.dart';
 class CategorySection extends StatelessWidget {
   final String title;
   final List<Movie> movies;
-  bool? withMoreInfoForMovieCard;
+  final bool? withMoreInfoForMovieCard;
 
-  CategorySection(
+  const CategorySection(
       {super.key,
       this.withMoreInfoForMovieCard,
       required this.title,
