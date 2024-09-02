@@ -7,6 +7,8 @@ import 'package:movie_app/features/home%20screen/view%20model/home_screen_view_m
 import 'package:movie_app/features/home%20screen/view/widgets/banner_view.dart';
 import 'package:movie_app/features/home%20screen/view/widgets/category_widget.dart';
 
+import '../../authentication/login/presentation/views/login_view.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -15,6 +17,19 @@ class HomeScreen extends StatelessWidget {
     HomeScreenViewModel model = HomeScreenViewModel();
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          actions: [
+            IconButton(
+                onPressed: () async {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              const LoginView()));
+                },
+                icon: const Icon(Icons.logout))
+          ],
+        ),
         body: BlocProvider(
           create: (context) => HomeCubit()..fetchMovies(),
           child: BlocBuilder<HomeCubit, HomeState>(
