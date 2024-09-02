@@ -93,7 +93,12 @@ class MovieInfoScreenState extends State<MovieInfoScreen> {
                               Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 8.sp),
                                 child: SizedBox(
-                                  child: Wrap(
+                                  height: 40,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.56,
+                                  child: ListView(
+                                    physics: const BouncingScrollPhysics(),
+                                    scrollDirection: Axis.horizontal,
                                     children: List.generate(
                                         (widget.movie.categories).length,
                                         (index) {
