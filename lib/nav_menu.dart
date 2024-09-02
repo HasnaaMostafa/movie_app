@@ -11,7 +11,7 @@ class NavMenuScreen extends StatefulWidget {
   const NavMenuScreen({super.key});
 
   @override
-  NavMenuScreenState createState() => NavMenuScreenState();
+  State<NavMenuScreen> createState() => NavMenuScreenState();
 }
 
 class NavMenuScreenState extends State<NavMenuScreen> {
