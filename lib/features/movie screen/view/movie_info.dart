@@ -93,7 +93,6 @@ class MovieInfoScreenState extends State<MovieInfoScreen> {
                               Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 8.sp),
                                 child: SizedBox(
-                                  width: 250.w,
                                   child: Wrap(
                                     children: List.generate(
                                         (widget.movie.categories).length,
@@ -109,26 +108,30 @@ class MovieInfoScreenState extends State<MovieInfoScreen> {
                                   ),
                                 ),
                               ),
-                              SizedBox(
-                                width: 250.w,
-                                child: Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 8.0.sp),
-                                  child: AnimatedCrossFade(
-                                    firstChild: Text(
+                              Padding(
+                                padding:
+                                    EdgeInsets.symmetric(horizontal: 8.0.sp),
+                                child: AnimatedCrossFade(
+                                  firstChild: SizedBox(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.56,
+                                    child: Text(
                                       widget.movie.description ??
                                           "No Description",
                                       maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
                                     ),
-                                    secondChild: Text(
-                                        widget.movie.description ??
-                                            "No Description"),
-                                    crossFadeState: _isExpanded
-                                        ? CrossFadeState.showSecond
-                                        : CrossFadeState.showFirst,
-                                    duration: const Duration(milliseconds: 200),
                                   ),
+                                  secondChild: SizedBox(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.56,
+                                    child: Text(widget.movie.description ??
+                                        "No Description"),
+                                  ),
+                                  crossFadeState: _isExpanded
+                                      ? CrossFadeState.showSecond
+                                      : CrossFadeState.showFirst,
+                                  duration: const Duration(milliseconds: 200),
                                 ),
                               ),
                               Padding(
