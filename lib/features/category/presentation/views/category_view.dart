@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/core/models/app_category.dart';
+import 'package:movie_app/core/constant/api_constants.dart' show appCategories;
 import 'package:movie_app/features/category/presentation/views/category_item.dart';
 import 'package:movie_app/features/category/presentation/views/category_view_details.dart';
 
@@ -12,7 +12,7 @@ class CategoryScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: const Text(
-          "Category",
+          "Categories",
           style: TextStyle(fontSize: 20),
         ),
         centerTitle: true,
@@ -28,19 +28,19 @@ class CategoryScreen extends StatelessWidget {
             crossAxisCount: 2,
             mainAxisSpacing: 20,
             children: List.generate(
-                12,
+                appCategories.length,
                 (item) => GestureDetector(
                       onTap: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    const CategoryViewDetails()));
+                                    CategoryViewDetails(
+                                        appCategory: appCategories[item]
+                                    )));
                       },
                       child: CategoryItem(
-                        appCategory: AppCategory(
-                            imageUrl: "assets/images/movie.jpeg",
-                            name: "Family"),
+                        appCategory: appCategories[item],
                       ),
                     )),
           )

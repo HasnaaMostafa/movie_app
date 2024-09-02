@@ -24,7 +24,7 @@ class MovieCardWatchList extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(8.0),
               child: Image.network(
-                movie.imageUrl,
+                movie.imageUrl??"https://png.pngtree.com/thumb_back/fh260/background/20200803/pngtree-abstract-grey-gradient-background-image_382062.jpg",
                 width: 100.w,
                 height: 120.w,
                 fit: BoxFit.cover,

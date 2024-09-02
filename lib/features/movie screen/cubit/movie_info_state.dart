@@ -4,7 +4,6 @@ import 'package:movie_app/core/models/movie.dart';
 abstract class MovieInfoState   {
   const MovieInfoState();
 
-  @override
   List<Object> get props => [];
 }
 

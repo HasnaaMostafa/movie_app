@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/core/models/movie.dart';
@@ -11,35 +10,47 @@ class BannerView extends StatefulWidget {
   const BannerView({super.key, required this.movies});
 
   @override
-  _BannerViewState createState() => _BannerViewState();
+  BannerViewState createState() => BannerViewState();
 }
 
-class _BannerViewState extends State<BannerView> {
+class BannerViewState extends State<BannerView> {
   late PageController _controller;
   int _currentPage = 0;
+  bool _isForward = true;
+  Timer? _timer;
 
   @override
   void initState() {
     super.initState();
     _controller = PageController(initialPage: 0);
 
-    Timer.periodic(const Duration(seconds: 2), (Timer timer) {
-      if (_currentPage < widget.movies.length - 1) {
+    _timer = Timer.periodic(const Duration(seconds: 2), (Timer timer) {
+      if (!mounted) {
+        timer.cancel();
+        return;
+      }
+      if (_currentPage == widget.movies.length - 1) {
+        _isForward = false;
+      } else if (_currentPage == 0) {
+        _isForward = true;
+      }
+      if (_isForward) {
         _currentPage++;
       } else {
-        _currentPage = 0;
+        _currentPage--;
       }
 
       _controller.animateToPage(
         _currentPage,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeIn,
+        duration: const Duration(milliseconds: 600),
+        curve: Curves.easeInOut,
       );
     });
   }
 
   @override
   void dispose() {
+    _timer?.cancel();
     _controller.dispose();
     super.dispose();
   }
@@ -59,7 +70,8 @@ class _BannerViewState extends State<BannerView> {
                   Stack(
                     children: [
                       Image.network(
-                        widget.movies[index].imageUrl,
+                        widget.movies[index].backgroundUrl ??
+                            "https://img.freepik.com/free-photo/gray-grunge-surface-wall-texture-background_1017-18216.jpg",
                         fit: BoxFit.fitWidth,
                         alignment: Alignment.center,
                         height: 200.h,
@@ -83,7 +95,9 @@ class _BannerViewState extends State<BannerView> {
                           Padding(
                             padding: EdgeInsets.only(top: 8.h),
                             child: Text(
-                              widget.movies[index].title,
+                              widget.movies[index].title.length > 25
+                                  ? '${widget.movies[index].title.substring(0, 25)}...'
+                                  : widget.movies[index].title,
                               style: Theme.of(context)
                                   .textTheme
                                   .headlineMedium

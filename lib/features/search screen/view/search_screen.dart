@@ -1,93 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'package:movie_app/core/models/movie.dart';
-import 'package:movie_app/features/movie%20screen/view/cubit/movie_info_cubit.dart';
+import 'package:movie_app/features/movie%20screen/cubit/movie_info_cubit.dart';
 import 'package:movie_app/features/movie%20screen/view/movie_info.dart';
+import 'package:movie_app/features/search%20screen/cubit/search_cubit.dart';
 import 'package:movie_app/features/watch%20list/view/widgets/movie_card_watch_list.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
 
   @override
-  _SearchScreenState createState() => _SearchScreenState();
+  SearchScreenState createState() => SearchScreenState();
 }
 
-class _SearchScreenState extends State<SearchScreen> {
+class SearchScreenState extends State<SearchScreen> {
   String query = '';
-  List<Movie> movies = [];
-  bool isLoading = false;
-
-  Future<void> searchMovies(String query) async {
-    movies = [
-      Movie(
-          description:
-              "This is a description of the mois is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
-          rating: 8.92,
-          releaseDate: "1990",
-          title: 'Movie 5',
-          imageUrl:
-              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s'),
-      Movie(
-          description:
-              "This is a description of the movie 6 This is a descriptmovie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
-          rating: 4,
-          releaseDate: "1990",
-          title: 'Movie 6',
-          imageUrl:
-              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s'),
-      Movie(
-          description:
-              "This is a description of the movie 6 This is an of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
-          rating: 8.92,
-          releaseDate: "1990",
-          title: 'Movie 5',
-          imageUrl:
-              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s'),
-      Movie(
-          description:
-              "This is a description of the movie 6 This ition of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
-          rating: 4,
-          releaseDate: "1990",
-          title: 'Movie 6',
-          imageUrl:
-              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s'),
-      Movie(
-          description:
-              "This is a description of the movie 6 Thicription of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
-          rating: 8.92,
-          releaseDate: "1990",
-          title: 'Movie 5',
-          imageUrl:
-              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s'),
-      Movie(
-          description:
-              "This is a description of the movie movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
-          rating: 4,
-          releaseDate: "1990",
-          title: 'Movie 6',
-          imageUrl:
-              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s'),
-    ];
-    // setState(() {
-    //   isLoading = true;
-    // });
-
-    // final response = await http.get(
-    //   Uri.parse('https://yourapi.com/search?query=$query'),
-    // );
-
-    // if (response.statusCode == 200) {
-    //   final List<dynamic> jsonResponse = json.decode(response.body);
-    //   setState(() {
-    // movies = jsonResponse.map((data) => Movie.fromJson(data)).toList();
-    //     isLoading = false;
-    //   });
-    // } else {
-    //   throw Exception('Failed to load movies');
-    // }
-  }
 
   void updateSearchQuery(String newQuery) {
     setState(() {
@@ -95,11 +21,7 @@ class _SearchScreenState extends State<SearchScreen> {
     });
 
     if (query.isNotEmpty) {
-      searchMovies(query);
-    } else {
-      setState(() {
-        movies = [];
-      });
+      BlocProvider.of<SearchCubit>(context).fetchMovies(query);
     }
   }
 
@@ -122,35 +44,52 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
               ),
             ),
-            isLoading
-                ? const Center(child: CircularProgressIndicator())
-                : Expanded(
-                    child: ListView.builder(
-                      itemCount: movies.length,
+            Expanded(
+              child: BlocBuilder<SearchCubit, SearchState>(
+                builder: (context, state) {
+                  if (state is SearchLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (state is SearchLoaded) {
+                    return ListView.builder(
+                      itemCount: state.movies.length,
                       itemBuilder: (context, index) {
                         return GestureDetector(
-                            onTap: () {
-                              FocusScope.of(context).unfocus();
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => BlocProvider(
-                                    create: (context) => MovieInfoCubit()
-                                      ..loadMoviesByCategory(
-                                          movies[index].categories.isNotEmpty
-                                              ? movies[index].categories[0].name
-                                              : "Action"),
-                                    child: MovieInfoScreen(
-                                      movie: movies[index],
-                                    ),
+                          onTap: () {
+                            FocusScope.of(context).unfocus();
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => BlocProvider(
+                                  create: (context) => MovieInfoCubit()
+                                    ..loadSimilarMovies(state.movies[index].id),
+                                  child: MovieInfoScreen(
+                                    movie: state.movies[index],
                                   ),
                                 ),
-                              );
-                            },
-                            child: MovieCardWatchList(movie: movies[index]));
+                              ),
+                            );
+                          },
+                          child: MovieCardWatchList(movie: state.movies[index]),
+                        );
                       },
-                    ),
-                  ),
+                    );
+                  } else if (state is SearchFailed) {
+                    return Center(
+                      child: Text(
+                        'No results found for $query with erorr: ${state.message}',
+                        style: const TextStyle(fontSize: 14),
+                      ),
+                    );
+                  } else {
+                    return const Center(
+                        child: Text(
+                      'find your favorite movie',
+                      style: TextStyle(fontSize: 14),
+                    ));
+                  }
+                },
+              ),
+            ),
           ],
         ),
       ),

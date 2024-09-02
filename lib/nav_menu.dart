@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/features/home%20screen/view/home_screen.dart';
+import 'package:movie_app/features/search%20screen/cubit/search_cubit.dart';
 import 'package:movie_app/features/search%20screen/view/search_screen.dart';
 import 'package:movie_app/features/watch%20list/view/watch_list_screen.dart';
 
@@ -9,15 +11,18 @@ class NavMenuScreen extends StatefulWidget {
   const NavMenuScreen({super.key});
 
   @override
-  State<NavMenuScreen> createState() => _NavMenuScreenState();
+  NavMenuScreenState createState() => NavMenuScreenState();
 }
 
-class _NavMenuScreenState extends State<NavMenuScreen> {
+class NavMenuScreenState extends State<NavMenuScreen> {
   int _selectedIndex = 0;
 
   static final List<Widget> _widgetOptions = <Widget>[
     const HomeScreen(),
-    const SearchScreen(),
+    BlocProvider(
+      create: (context) => SearchCubit(),
+      child: const SearchScreen(),
+    ),
     const CategoryScreen(),
     const Watchlist()
   ];
