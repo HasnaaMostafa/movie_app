@@ -9,7 +9,6 @@ class SearchViewModel {
       var response = await dioApiService.getRequest(EndPoints.search(query, 1));
       List<Movie> movies = [];
       if (response.statusCode == 200) {
-        print(response.data);
         final data = response.data;
         data['results'].forEach((movie) {
           movies.add(Movie.fromJson(movie));

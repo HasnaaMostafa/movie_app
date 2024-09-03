@@ -14,8 +14,8 @@ class EndPoints {
   static const String discoverMovie = '/3/discover/movie';
   static String search(String query, int page) =>
       '/3/search/movie?query=$query&include_adult=false&language=en-US&page=$page&api_key=$apiKey';
-  static String categoryMovies(int id) =>
-      '/3/discover/movie?api_key=$apiKey&include_adult=false&with_genres=$id&language=en-US';
+  static String categoryMovies(int id,int page) =>
+      '/3/discover/movie?api_key=$apiKey&include_adult=false&with_genres=$id&language=en-US&page=$page';
 }
 // get category movies by id
 // https://api.themoviedb.org/3/discover/movie?api_key=f40f1fb325c12c2fbfcc257fdcf158f9&with_genres=28&language=en-US
