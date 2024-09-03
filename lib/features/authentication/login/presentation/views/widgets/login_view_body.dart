@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/core/helper/cache_helper.dart';
 import 'package:movie_app/core/utils/show_toast.dart';
 import 'package:movie_app/features/authentication/register/presentation/views/register_view.dart';
 import 'package:movie_app/nav_menu.dart';
@@ -46,10 +47,22 @@ class _LoginViewBodyState extends State<LoginViewBody> {
         padding: const EdgeInsets.only(top: 50.0, right: 20, left: 20),
         child: BlocListener<LoginCubit, LoginState>(
           listener: (context, state) {
-            if (state is LoginSuccess || state is LoginGoogleSuccess) {
+            if (state is LoginSuccess) {
               showToast(
                   message: "Successfully Login", state: ToastStates.success);
 
+              CacheHelper.saveData(
+                  key: "uid", value: state.user.uId.toString());
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) =>
+                          const NavMenuScreen()));
+            }
+            if (state is LoginGoogleSuccess) {
+              showToast(
+                  message: "Successfully Login", state: ToastStates.success);
+              CacheHelper.saveData(key: "uid", value: state.userModel.uId);
               Navigator.push(
                   context,
                   MaterialPageRoute(

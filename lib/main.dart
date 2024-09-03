@@ -6,10 +6,14 @@ import 'package:movie_app/core/utils/theme.dart';
 import 'package:movie_app/features/authentication/login/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:movie_app/features/authentication/register/presentation/manager/register_cubit/register_cubit.dart';
 import 'package:movie_app/features/intro/presentation/views/intro_view.dart';
+import 'package:movie_app/features/profile/data/profile_repo.dart';
+import 'package:movie_app/features/profile/presentation/manager/cubit/profile_cubit.dart';
+import 'package:movie_app/nav_menu.dart';
 
 import 'core/helper/bloc_observer.dart';
 import 'core/helper/cache_helper.dart';
 import 'core/helper/dio_helper.dart';
+import 'core/utils/constants.dart';
 import 'core/utils/service_locator.dart';
 import 'features/authentication/login/data/repo/login_repo.dart';
 import 'features/authentication/register/data/repo/register_repo.dart';
@@ -24,11 +28,25 @@ void main() async {
   await CacheHelper.init();
   DioHelper.init();
   Bloc.observer = MyBlocObserver();
-  runApp(const MyApp());
+
+  Widget widget;
+
+  uId = CacheHelper.getData(key: "uid");
+
+  if (uId != null) {
+    widget = const NavMenuScreen();
+  } else {
+    widget = const IntroView();
+  }
+  runApp(MyApp(
+    startWidget: widget,
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({super.key, this.startWidget});
+
+  final Widget? startWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +57,11 @@ class MyApp extends StatelessWidget {
                 LoginCubit(loginRepo: getIt.get<LoginRepo>())),
         BlocProvider(
             create: (BuildContext context) =>
-                RegisterCubit(registerRepo: getIt.get<RegisterRepo>()))
+                RegisterCubit(registerRepo: getIt.get<RegisterRepo>())),
+        BlocProvider(
+            create: (BuildContext context) =>
+                ProfileCubit(profileRepo: getIt.get<ProfileRepo>())
+                  ..getData(uid: uId ?? "")),
       ],
       child: ScreenUtilInit(
         designSize: MediaQuery.of(context).size,
@@ -48,7 +70,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: TAppTheme.lightTheme,
           darkTheme: TAppTheme.darkTheme,
-          home: const IntroView(),
+          home: startWidget,
         ),
       ),
     );

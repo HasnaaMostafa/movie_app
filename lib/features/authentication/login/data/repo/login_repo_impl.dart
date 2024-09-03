@@ -35,7 +35,7 @@ class LoginRepoImpl implements LoginRepo {
   }
 
   @override
-  Future<Either<Failure, User>> signInWithGoogle() async {
+  Future<Either<Failure, UserModel>> signInWithGoogle() async {
     try {
       await signOut();
 
@@ -72,7 +72,7 @@ class LoginRepoImpl implements LoginRepo {
         print(error.toString());
       });
 
-      return right(userCredential.user!);
+      return right(model);
     } on Exception catch (e) {
       if (e is DioException) {
         return left(ServerFailure.fromDioException(e));

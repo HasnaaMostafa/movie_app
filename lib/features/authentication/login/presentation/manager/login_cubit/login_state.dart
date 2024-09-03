@@ -21,9 +21,9 @@ class LoginError extends LoginState {
 class LoginGoogleLoading extends LoginState {}
 
 class LoginGoogleSuccess extends LoginState {
-  final User user;
+  final UserModel userModel;
 
-  LoginGoogleSuccess({required this.user});
+  LoginGoogleSuccess({required this.userModel});
 }
 
 class LoginGoogleError extends LoginState {

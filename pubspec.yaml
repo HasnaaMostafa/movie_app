@@ -48,6 +48,7 @@ dependencies:
   google_sign_in: ^6.2.1
   get_it: ^7.7.0
   fluttertoast: ^8.2.8
+  skeletonizer: ^1.4.2
 
 
 dev_dependencies:

@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/features/authentication/login/data/repo/login_repo.dart';
 
@@ -28,8 +27,8 @@ class LoginCubit extends Cubit<LoginState> {
 
     response.fold((failure) {
       emit(LoginGoogleError(error: failure.errMessage));
-    }, (user) {
-      emit(LoginGoogleSuccess(user: user));
+    }, (userModel) {
+      emit(LoginGoogleSuccess(userModel: userModel));
     });
   }
 }

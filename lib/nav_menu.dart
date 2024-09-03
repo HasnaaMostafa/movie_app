@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/features/home%20screen/view/home_screen.dart';
+import 'package:movie_app/features/profile/presentation/view/profile_view.dart';
 import 'package:movie_app/features/search%20screen/cubit/search_cubit.dart';
 import 'package:movie_app/features/search%20screen/view/search_screen.dart';
-import 'package:movie_app/features/watch%20list/view/watch_list_screen.dart';
 
 import 'features/category/presentation/views/category_view.dart';
 
@@ -24,7 +24,7 @@ class NavMenuScreenState extends State<NavMenuScreen> {
       child: const SearchScreen(),
     ),
     const CategoryScreen(),
-    const Watchlist()
+    const ProfileScreen()
   ];
 
   void _onItemTapped(int index) {
@@ -55,8 +55,8 @@ class NavMenuScreenState extends State<NavMenuScreen> {
               label: 'Categories',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.book),
-              label: 'WatchList',
+              icon: Icon(Icons.person_2_outlined),
+              label: 'Profile',
             ),
           ],
           currentIndex: _selectedIndex,
