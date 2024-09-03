@@ -44,7 +44,13 @@ class CustomTextField extends StatelessWidget {
               onSaved: onSaved,
               controller: controller,
               keyboardType: keyboardType,
-              validator: validator,
+              validator: validator ??
+                  (String? value) {
+                    if (value!.isEmpty) {
+                      return "Field required";
+                    }
+                    return null;
+                  },
               onChanged: onChanged,
               onFieldSubmitted: onFieldSubmitted,
               obscureText: isPassword ?? false,

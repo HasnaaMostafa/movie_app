@@ -11,7 +11,7 @@ class NavMenuScreen extends StatefulWidget {
   const NavMenuScreen({super.key});
 
   @override
-  NavMenuScreenState createState() => NavMenuScreenState();
+  State<NavMenuScreen> createState() => NavMenuScreenState();
 }
 
 class NavMenuScreenState extends State<NavMenuScreen> {
@@ -35,36 +35,38 @@ class NavMenuScreenState extends State<NavMenuScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.movie),
-            label: 'Categories',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.book),
-            label: 'WatchList',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber,
-        unselectedItemColor: Colors.grey,
-        backgroundColor: Theme.of(context).brightness == Brightness.dark
-            ? Colors.grey[700]
-            : Colors.grey[200],
-        onTap: _onItemTapped,
+    return SafeArea(
+      child: Scaffold(
+        body: Center(
+          child: _widgetOptions.elementAt(_selectedIndex),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.search),
+              label: 'Search',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.movie),
+              label: 'Categories',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.book),
+              label: 'WatchList',
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: Colors.amber,
+          unselectedItemColor: Colors.grey,
+          backgroundColor: Theme.of(context).brightness == Brightness.dark
+              ? Colors.grey[700]
+              : Colors.grey[200],
+          onTap: _onItemTapped,
+        ),
       ),
     );
   }
