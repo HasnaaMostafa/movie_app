@@ -7,7 +7,7 @@ class CategoryViewModel {
     DioApiService dioService = DioApiService();
     try {
       final response =
-          await dioService.getRequest(EndPoints.categoryMovies(categoryId));
+          await dioService.getRequest(EndPoints.categoryMovies(categoryId,2));
       List<Movie> movies = [];
       if (response.statusCode == 200) {
         movies = (response.data['results'] as List).map((e) => Movie.fromJson(e)).toList();
