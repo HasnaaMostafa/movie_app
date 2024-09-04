@@ -3,6 +3,7 @@ import 'package:movie_app/core/network/dio_network.dart';
 import 'package:movie_app/core/network/end_points.dart';
 
 class HomeScreenViewModel {
+  static bool isloading = false;
   String firstCagtegory = 'New Releses';
   String secondCategoryText = 'Recommended';
   String searchText = 'Search for a movie';

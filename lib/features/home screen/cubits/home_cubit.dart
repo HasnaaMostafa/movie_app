@@ -7,8 +7,13 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeInitial());
 
   Future<void> fetchMovies() async {
-    await Future.delayed(const Duration(seconds: 3));
-
+    if (HomeScreenViewModel.isloading) {
+      emit(HomeLoaded(
+          CachingLoadedData.bannerMovies,
+          CachingLoadedData.popularMovies,
+          CachingLoadedData.recommendedMovies));
+    }
+    // await Future.delayed(const Duration(seconds: 2));
     // Example data
     final bannerMovies = await HomeScreenViewModel.featchingPopularMovies();
     final popularMovies = await HomeScreenViewModel.featchingBannerMovies();
@@ -68,6 +73,16 @@ class HomeCubit extends Cubit<HomeState> {
           imageUrl:
               'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s'),
     ];
+    HomeScreenViewModel.isloading = true;
+    CachingLoadedData.bannerMovies = bannerMovies;
+    CachingLoadedData.popularMovies = popularMovies;
+    CachingLoadedData.recommendedMovies = recommendedMovies;
     emit(HomeLoaded(bannerMovies, popularMovies, recommendedMovies));
   }
+}
+
+class CachingLoadedData {
+  static List<Movie> bannerMovies = [];
+  static List<Movie> popularMovies = [];
+  static List<Movie> recommendedMovies = [];
 }
