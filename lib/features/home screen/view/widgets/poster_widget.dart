@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/core/models/movie.dart';
 import 'package:movie_app/features/watch%20list/view/cubit/model/watch_list_repo.dart';
+import 'package:movie_app/features/watch%20list/view/cubit/save_model/save_and_fetch_movie_cubit.dart';
 
 class PosterWidget extends StatelessWidget {
   const PosterWidget({super.key, required this.movie, this.width, this.height});
@@ -9,6 +11,7 @@ class PosterWidget extends StatelessWidget {
   final Movie movie;
   final double? width;
   final double? height;
+
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -31,6 +34,8 @@ class PosterWidget extends StatelessWidget {
                 child: GestureDetector(
                   onTap: () {
                     if (WatchListRepository.movies.isEmpty) {
+                      BlocProvider.of<SaveAndFetchMovieCubit>(context)
+                          .saveMovie(movie);
                       WatchListRepository.movies.add(movie);
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text('Movie added to watchlist'),
@@ -41,11 +46,15 @@ class PosterWidget extends StatelessWidget {
                     for (var i = 0;
                         i < WatchListRepository.movies.length;
                         i++) {
+                      BlocProvider.of<SaveAndFetchMovieCubit>(context)
+                          .saveMovie(movie);
                       if (WatchListRepository.movies[i].description ==
                           movie.description) {
                         break;
                       }
                       if (i == WatchListRepository.movies.length - 1) {
+                        BlocProvider.of<SaveAndFetchMovieCubit>(context)
+                            .saveMovie(movie);
                         WatchListRepository.movies.add(movie);
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content:

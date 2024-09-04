@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,6 +7,7 @@ import 'package:movie_app/core/utils/theme.dart';
 import 'package:movie_app/features/authentication/login/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:movie_app/features/authentication/register/presentation/manager/register_cubit/register_cubit.dart';
 import 'package:movie_app/features/intro/presentation/views/intro_view.dart';
+import 'package:movie_app/features/movie%20screen/cubit/movie_info_cubit.dart';
 import 'package:movie_app/features/profile/data/profile_repo.dart';
 import 'package:movie_app/features/profile/presentation/manager/cubit/profile_cubit.dart';
 import 'package:movie_app/nav_menu.dart';
@@ -17,6 +19,7 @@ import 'core/utils/constants.dart';
 import 'core/utils/service_locator.dart';
 import 'features/authentication/login/data/repo/login_repo.dart';
 import 'features/authentication/register/data/repo/register_repo.dart';
+import 'features/watch list/view/cubit/save_model/save_and_fetch_movie_cubit.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -61,7 +64,12 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (BuildContext context) =>
                 ProfileCubit(profileRepo: getIt.get<ProfileRepo>())
-                  ..getData(uid: uId ?? "")),
+                  ..getData(uid: CacheHelper.getData(key: "uid") ?? "")),
+        BlocProvider(
+            create: (BuildContext context) =>
+                SaveAndFetchMovieCubit(FirebaseFirestore.instance)
+                  ..fetchMovies(uid: uId ?? "")),
+        BlocProvider(create: (BuildContext context) => MovieInfoCubit()),
       ],
       child: ScreenUtilInit(
         designSize: MediaQuery.of(context).size,

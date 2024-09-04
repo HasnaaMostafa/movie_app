@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/core/helper/cache_helper.dart';
 import 'package:movie_app/core/shimmer/home_screen_shimmer.dart';
 import 'package:movie_app/features/home%20screen/cubits/home_cubit.dart';
 import 'package:movie_app/features/home%20screen/cubits/home_state.dart';
@@ -18,9 +19,13 @@ class HomeScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          scrolledUnderElevation: 0,
+          elevation: 0,
+          leading: const SizedBox(),
           actions: [
             IconButton(
                 onPressed: () async {
+                  await CacheHelper.removeData(key: "uid");
                   Navigator.push(
                       context,
                       MaterialPageRoute(
