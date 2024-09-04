@@ -9,8 +9,9 @@ class MovieInfoCubit extends Cubit<MovieInfoState> {
   Future<void> loadSimilarMovies(int movieId) async {
     try {
       emit(const MovieInfoLoading());
+      Movie movie = await MovieViewModel.getMovieInfo(movieId);
       List<Movie> movies = await MovieViewModel.getSimilarMovies(movieId);
-      emit(MovieInfoLoaded(movies));
+      emit(MovieInfoLoaded((movies, movie)));
     } catch (e) {
       emit(MovieInfoError(e.toString()));
       // Handle error
