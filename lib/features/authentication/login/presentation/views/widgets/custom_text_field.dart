@@ -20,7 +20,7 @@ class CustomTextField extends StatelessWidget {
 
   final String? hintText;
   final TextStyle? hintStyle;
-  final String? suffix;
+  final Widget? suffix;
   final bool? isPassword;
   final void Function()? suffixPressed;
   final String? Function(String?)? validator;
@@ -62,6 +62,7 @@ class CustomTextField extends StatelessWidget {
                 hintStyle: hintStyle,
                 fillColor: const Color(0xff232325),
                 filled: true,
+                suffixIcon: suffix,
                 enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
                     borderSide: const BorderSide(color: Color(0xff1d1d1d))),
