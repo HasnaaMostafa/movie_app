@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/utils/show_toast.dart';
 import 'package:movie_app/features/authentication/login/presentation/views/login_view.dart';
+import 'package:movie_app/features/authentication/manager/password_cubit.dart';
 import 'package:movie_app/features/authentication/register/presentation/manager/register_cubit/register_cubit.dart';
 import 'package:movie_app/nav_menu.dart';
 
@@ -134,10 +135,31 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                       hintText: "Phone Number",
                       hintStyle: const TextStyle(color: Color(0xff7f7f80)),
                     ),
-                    CustomTextField(
-                      controller: passwordController,
-                      hintText: "Password",
-                      hintStyle: const TextStyle(color: Color(0xff7f7f80)),
+                    BlocBuilder<PasswordVisibilityCubit, bool>(
+                      builder: (context, state) {
+                        return CustomTextField(
+                          isPassword: state,
+                          controller: passwordController,
+                          hintText: "Password",
+                          suffix: GestureDetector(
+                              onTap: () {
+                                context
+                                    .read<PasswordVisibilityCubit>()
+                                    .toggleVisibility();
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 15.0),
+                                child: Icon(
+                                  BlocProvider.of<PasswordVisibilityCubit>(
+                                          context)
+                                      .suffix,
+                                  size: 15,
+                                ),
+                              )),
+                          hintStyle: const TextStyle(color: Color(0xff7f7f80)),
+                        );
+                      },
                     ),
                     const SizedBox(
                       height: 10,

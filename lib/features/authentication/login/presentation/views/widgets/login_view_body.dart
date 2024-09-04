@@ -5,6 +5,7 @@ import 'package:movie_app/core/utils/show_toast.dart';
 import 'package:movie_app/features/authentication/register/presentation/views/register_view.dart';
 import 'package:movie_app/nav_menu.dart';
 
+import '../../../../manager/password_cubit.dart';
 import '../../manager/login_cubit/login_cubit.dart';
 import 'custom_button.dart';
 import 'custom_text_field.dart';
@@ -111,10 +112,31 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                     hintText: "Email / Phone Number",
                     hintStyle: const TextStyle(color: Color(0xff7f7f80)),
                   ),
-                  CustomTextField(
-                    controller: passwordController,
-                    hintText: "Password",
-                    hintStyle: const TextStyle(color: Color(0xff7f7f80)),
+                  BlocBuilder<PasswordVisibilityCubit, bool>(
+                    builder: (context, state) {
+                      return CustomTextField(
+                        controller: passwordController,
+                        isPassword: state,
+                        suffix: GestureDetector(
+                            onTap: () {
+                              context
+                                  .read<PasswordVisibilityCubit>()
+                                  .toggleVisibility();
+                            },
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15.0),
+                              child: Icon(
+                                BlocProvider.of<PasswordVisibilityCubit>(
+                                        context)
+                                    .suffix,
+                                size: 15,
+                              ),
+                            )),
+                        hintText: "Password",
+                        hintStyle: const TextStyle(color: Color(0xff7f7f80)),
+                      );
+                    },
                   ),
                   const SizedBox(
                     height: 50,

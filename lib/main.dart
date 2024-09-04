@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/core/utils/theme.dart';
 import 'package:movie_app/features/authentication/login/presentation/manager/login_cubit/login_cubit.dart';
+import 'package:movie_app/features/authentication/manager/password_cubit.dart';
 import 'package:movie_app/features/authentication/register/presentation/manager/register_cubit/register_cubit.dart';
 import 'package:movie_app/features/intro/presentation/views/intro_view.dart';
 import 'package:movie_app/features/movie%20screen/cubit/movie_info_cubit.dart';
@@ -70,6 +71,8 @@ class MyApp extends StatelessWidget {
                 SaveAndFetchMovieCubit(FirebaseFirestore.instance)
                   ..fetchMovies(uid: uId ?? "")),
         BlocProvider(create: (BuildContext context) => MovieInfoCubit()),
+        BlocProvider(
+            create: (BuildContext context) => PasswordVisibilityCubit()),
       ],
       child: ScreenUtilInit(
         designSize: MediaQuery.of(context).size,
