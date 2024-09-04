@@ -73,10 +73,12 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                 showToast(
                     message: "Successfully Created",
                     state: ToastStates.success);
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => const LoginView()));
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => const LoginView()),
+                  (route) => false,
+                );
                 emailController.clear();
                 passwordController.clear();
                 nameController.clear();

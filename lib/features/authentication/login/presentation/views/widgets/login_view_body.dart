@@ -64,11 +64,14 @@ class _LoginViewBodyState extends State<LoginViewBody> {
               showToast(
                   message: "Successfully Login", state: ToastStates.success);
               CacheHelper.saveData(key: "uid", value: state.userModel.uId);
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) =>
-                          const NavMenuScreen()));
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) => const NavMenuScreen()),
+                (route) => false,
+              );
+              emailController.clear();
+              passwordController.clear();
             }
             if (state is LoginError) {
               if (state.error.contains(
