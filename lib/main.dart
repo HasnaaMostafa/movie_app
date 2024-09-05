@@ -5,8 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/core/utils/theme.dart';
 import 'package:movie_app/features/authentication/login/presentation/manager/login_cubit/login_cubit.dart';
+import 'package:movie_app/features/authentication/login/presentation/manager/logout_cubit/logout_cubit.dart';
 import 'package:movie_app/features/authentication/manager/password_cubit.dart';
 import 'package:movie_app/features/authentication/register/presentation/manager/register_cubit/register_cubit.dart';
+import 'package:movie_app/features/edit_profile/presentation/manager/edit_profile_cubit.dart';
 import 'package:movie_app/features/intro/presentation/views/intro_view.dart';
 import 'package:movie_app/features/movie%20screen/cubit/movie_info_cubit.dart';
 import 'package:movie_app/features/profile/data/profile_repo.dart';
@@ -68,11 +70,12 @@ class MyApp extends StatelessWidget {
                   ..getData(uid: CacheHelper.getData(key: "uid") ?? "")),
         BlocProvider(
             create: (BuildContext context) =>
-                SaveAndFetchMovieCubit(FirebaseFirestore.instance)
-                  ..fetchMovies(uid: uId ?? "")),
+                SaveAndFetchMovieCubit(FirebaseFirestore.instance)),
         BlocProvider(create: (BuildContext context) => MovieInfoCubit()),
         BlocProvider(
             create: (BuildContext context) => PasswordVisibilityCubit()),
+        BlocProvider(create: (BuildContext context) => EditProfileCubit()),
+        BlocProvider(create: (BuildContext context) => LogoutCubit()),
       ],
       child: ScreenUtilInit(
         designSize: MediaQuery.of(context).size,

@@ -9,7 +9,7 @@ import 'package:movie_app/features/authentication/login/data/models/user_model.d
 import 'package:movie_app/features/authentication/login/data/repo/login_repo.dart';
 
 class LoginRepoImpl implements LoginRepo {
-  FirebaseAuth auth = FirebaseAuth.instance;
+  static FirebaseAuth auth = FirebaseAuth.instance;
   final GoogleSignIn googleSignIn = GoogleSignIn();
 
   @override
@@ -52,27 +52,35 @@ class LoginRepoImpl implements LoginRepo {
       UserCredential userCredential =
           await auth.signInWithCredential(credential);
 
-      UserModel model = UserModel(
-          name: userCredential.user?.displayName,
-          phone: userCredential.user?.phoneNumber,
-          email: userCredential.user?.email,
-          uId: userCredential.user?.uid,
-          bio: "write you bio...",
-          isEmailVerified: false,
-          image: "",
-          cover: "",
-          isAgree: true);
-      FirebaseFirestore.instance
+      DocumentSnapshot userDoc = await FirebaseFirestore.instance
           .collection("users")
           .doc(userCredential.user?.uid)
-          .set(model.toMap())
-          .then((value) {
-        print("Account created");
-      }).catchError((error) {
-        print(error.toString());
-      });
+          .get();
+      if (!userDoc.exists) {
+        UserModel model = UserModel(
+            name: userCredential.user?.displayName,
+            phone: userCredential.user?.phoneNumber,
+            email: userCredential.user?.email,
+            uId: userCredential.user?.uid,
+            bio: "",
+            isEmailVerified: false,
+            image: userCredential.user?.photoURL,
+            cover: "",
+            isAgree: true);
+        FirebaseFirestore.instance
+            .collection("users")
+            .doc(userCredential.user?.uid)
+            .set(model.toMap())
+            .then((value) {
+          print("Account created");
+        }).catchError((error) {
+          print(error.toString());
+        });
+      } else {
+        print("User already exists");
+      }
 
-      return right(model);
+      return right(UserModel.fromJson(userDoc.data() as Map<String, dynamic>));
     } on Exception catch (e) {
       if (e is DioException) {
         return left(ServerFailure.fromDioException(e));

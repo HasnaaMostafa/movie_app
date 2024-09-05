@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/features/edit_profile/presentation/manager/edit_profile_cubit.dart';
+import 'package:movie_app/features/edit_profile/presentation/views/edit_profile_view.dart';
 
 import '../../../../authentication/login/data/models/user_model.dart';
 import '../../../../watch list/view/watch_list_screen.dart';
@@ -22,14 +25,27 @@ class ProfileBody extends StatelessWidget {
           style: TextStyle(fontSize: 15),
         ),
         centerTitle: true,
-        actions: const [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            child: Icon(
-              Icons.edit,
-              size: 16,
-              color: Color(0xffB7950B),
-            ),
+        actions: [
+          BlocBuilder<EditProfileCubit, EditProfileState>(
+            builder: (context, state) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                const EditProfileScreen()));
+                  },
+                  child: const Icon(
+                    Icons.edit,
+                    size: 22,
+                    color: Color(0xffB7950B),
+                  ),
+                ),
+              );
+            },
           ),
         ],
       ),
@@ -39,12 +55,27 @@ class ProfileBody extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              flex: 1,
+              flex: 3,
               child: Center(
                 child: Column(
                   children: [
                     const SizedBox(
                       height: 5,
+                    ),
+                    Stack(
+                      alignment: Alignment.bottomRight,
+                      children: [
+                        CircleAvatar(
+                          radius: 50,
+                          backgroundImage: userModel?.image != null
+                              ? NetworkImage(userModel!.image!)
+                              : const AssetImage('assets/images/profile.jpg')
+                                  as ImageProvider,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -57,10 +88,6 @@ class ProfileBody extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    Text(
-                      "${userModel?.bio}",
-                      style: const TextStyle(color: Colors.grey),
-                    ),
                   ],
                 ),
               ),
@@ -69,7 +96,7 @@ class ProfileBody extends StatelessWidget {
               "Saved Movies",
               style: TextStyle(fontSize: 15),
             ),
-            const Expanded(flex: 3, child: Watchlist()),
+            const Expanded(flex: 5, child: Watchlist()),
           ],
         ),
       ),

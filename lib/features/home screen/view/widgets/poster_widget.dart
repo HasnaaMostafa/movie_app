@@ -5,7 +5,9 @@ import 'package:movie_app/core/models/movie.dart';
 import 'package:movie_app/features/watch%20list/view/cubit/model/watch_list_repo.dart';
 import 'package:movie_app/features/watch%20list/view/cubit/save_model/save_and_fetch_movie_cubit.dart';
 
-class PosterWidget extends StatelessWidget {
+import '../../../../core/helper/cache_helper.dart';
+
+class PosterWidget extends StatefulWidget {
   const PosterWidget({super.key, required this.movie, this.width, this.height});
 
   final Movie movie;
@@ -13,19 +15,32 @@ class PosterWidget extends StatelessWidget {
   final double? height;
 
   @override
+  State<PosterWidget> createState() => _PosterWidgetState();
+}
+
+class _PosterWidgetState extends State<PosterWidget> {
+  String? uid;
+
+  @override
+  void initState() {
+    uid = CacheHelper.getData(key: "uid");
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(5),
       child: SizedBox(
-        width: width ?? 100.w,
-        height: height ?? 120.h,
+        width: widget.width ?? 100.w,
+        height: widget.height ?? 120.h,
         child: Stack(
           children: [
             SizedBox(
-                width: width ?? 100.w,
-                height: height ?? 120.h,
+                width: widget.width ?? 100.w,
+                height: widget.height ?? 120.h,
                 child: Image.network(
-                    movie.imageUrl ??
+                    widget.movie.imageUrl ??
                         "https://png.pngtree.com/thumb_back/fh260/background/20200803/pngtree-abstract-grey-gradient-background-image_382062.jpg",
                     fit: BoxFit.cover)),
             Positioned(
@@ -35,8 +50,8 @@ class PosterWidget extends StatelessWidget {
                   onTap: () {
                     if (WatchListRepository.movies.isEmpty) {
                       BlocProvider.of<SaveAndFetchMovieCubit>(context)
-                          .saveMovie(movie);
-                      WatchListRepository.movies.add(movie);
+                          .saveMovie(widget.movie, uid ?? "");
+                      WatchListRepository.movies.add(widget.movie);
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text('Movie added to watchlist'),
                         duration: Duration(seconds: 1),
@@ -47,18 +62,18 @@ class PosterWidget extends StatelessWidget {
                         i < WatchListRepository.movies.length;
                         i++) {
                       BlocProvider.of<SaveAndFetchMovieCubit>(context)
-                          .saveMovie(movie);
+                          .saveMovie(widget.movie, uid ?? "");
                       if (WatchListRepository.movies[i].description ==
-                          movie.description) {
+                          widget.movie.description) {
                         break;
                       }
                       if (i == WatchListRepository.movies.length - 1) {
                         BlocProvider.of<SaveAndFetchMovieCubit>(context)
-                            .saveMovie(movie);
-                        WatchListRepository.movies.add(movie);
+                            .saveMovie(widget.movie, uid ?? "");
+                        WatchListRepository.movies.add(widget.movie);
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content:
-                              Text('${movie.title} Movie added to watchlist'),
+                          content: Text(
+                              '${widget.movie.title} Movie added to watchlist'),
                           duration: const Duration(seconds: 1),
                         ));
                         return;

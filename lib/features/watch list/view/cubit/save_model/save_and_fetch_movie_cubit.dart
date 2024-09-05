@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_app/core/utils/constants.dart';
 
 import '../../../../../core/models/movie.dart';
 
@@ -24,7 +23,7 @@ class SaveAndFetchMovieCubit extends Cubit<List<Movie>> {
     }
   }
 
-  Future<void> saveMovie(Movie movie) async {
+  Future<void> saveMovie(Movie movie, String uid) async {
     try {
       await _firestore.collection('movies').doc(movie.id.toString()).set({
         'title': movie.title,
@@ -35,9 +34,9 @@ class SaveAndFetchMovieCubit extends Cubit<List<Movie>> {
         'vote_average': movie.rating,
         'overview': movie.description,
         'genre_ids': movie.categories.map((cat) => cat.id).toList(),
-        'userId': uId
+        'userId': uid
       });
-      fetchMovies(uid: uId ?? "");
+      fetchMovies(uid: uid);
     } catch (error) {
       print('Error saving movie: $error');
     }

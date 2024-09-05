@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_app/core/helper/cache_helper.dart';
 import 'package:movie_app/core/shimmer/home_screen_shimmer.dart';
 import 'package:movie_app/features/home%20screen/cubits/home_cubit.dart';
 import 'package:movie_app/features/home%20screen/cubits/home_state.dart';
 import 'package:movie_app/features/home%20screen/view%20model/home_screen_view_model.dart';
 import 'package:movie_app/features/home%20screen/view/widgets/banner_view.dart';
 import 'package:movie_app/features/home%20screen/view/widgets/category_widget.dart';
-
-import '../../authentication/login/presentation/views/login_view.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -18,23 +15,6 @@ class HomeScreen extends StatelessWidget {
     HomeScreenViewModel model = HomeScreenViewModel();
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          scrolledUnderElevation: 0,
-          elevation: 0,
-          leading: const SizedBox(),
-          actions: [
-            IconButton(
-                onPressed: () async {
-                  await CacheHelper.removeData(key: "uid");
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              const LoginView()));
-                },
-                icon: const Icon(Icons.logout))
-          ],
-        ),
         body: BlocProvider(
           create: (context) => HomeCubit()..fetchMovies(),
           child: BlocBuilder<HomeCubit, HomeState>(

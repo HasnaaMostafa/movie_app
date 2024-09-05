@@ -4,8 +4,9 @@ import 'package:movie_app/core/helper/cache_helper.dart';
 import 'package:movie_app/features/authentication/login/data/models/user_model.dart';
 import 'package:movie_app/features/profile/presentation/manager/cubit/profile_cubit.dart';
 import 'package:movie_app/features/profile/presentation/view/widgets/profile_body.dart';
-import 'package:movie_app/features/watch%20list/view/cubit/save_model/save_and_fetch_movie_cubit.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+
+import '../../../watch list/view/cubit/save_model/save_and_fetch_movie_cubit.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({
