@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/core/helper/cache_helper.dart';
 import 'package:movie_app/features/movie%20screen/view/movie_info.dart';
-import 'package:movie_app/features/watch%20list/view/cubit/model/watch_list_repo.dart';
 import 'package:movie_app/features/watch%20list/view/cubit/save_model/save_and_fetch_movie_cubit.dart';
 import 'package:movie_app/features/watch%20list/view/cubit/watch_list_cubit.dart';
 import 'package:movie_app/features/watch%20list/view/cubit/watch_list_states.dart';
@@ -17,6 +17,13 @@ class Watchlist extends StatefulWidget {
 }
 
 class WatchlistState extends State<Watchlist> {
+  String? uid;
+  @override
+  void initState() {
+    uid = CacheHelper.getData(key: "uid");
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -39,8 +46,11 @@ class WatchlistState extends State<Watchlist> {
                       onDismissed: (direction) async {
                         await context
                             .read<SaveAndFetchMovieCubit>()
-                            .deleteMovie(movie);
+                            .deleteMovie(movie, uid ?? "");
 
+                        setState(() {
+                          movies.removeAt(index);
+                        });
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             duration: const Duration(seconds: 1),
@@ -83,4 +93,3 @@ class WatchlistState extends State<Watchlist> {
     );
   }
 }
-

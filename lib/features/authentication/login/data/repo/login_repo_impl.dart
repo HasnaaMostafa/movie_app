@@ -76,11 +76,12 @@ class LoginRepoImpl implements LoginRepo {
         }).catchError((error) {
           print(error.toString());
         });
+        return right(model);
       } else {
         print("User already exists");
+        return right(
+            UserModel.fromJson(userDoc.data() as Map<String, dynamic>));
       }
-
-      return right(UserModel.fromJson(userDoc.data() as Map<String, dynamic>));
     } on Exception catch (e) {
       if (e is DioException) {
         return left(ServerFailure.fromDioException(e));

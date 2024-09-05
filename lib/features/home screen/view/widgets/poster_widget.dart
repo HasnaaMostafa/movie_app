@@ -50,7 +50,7 @@ class _PosterWidgetState extends State<PosterWidget> {
                   onTap: () {
                     if (WatchListRepository.movies.isEmpty) {
                       BlocProvider.of<SaveAndFetchMovieCubit>(context)
-                          .saveMovie(widget.movie);
+                          .saveMovie(widget.movie, uid ?? "");
                       WatchListRepository.movies.add(widget.movie);
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text('Movie added to watchlist'),
@@ -62,14 +62,14 @@ class _PosterWidgetState extends State<PosterWidget> {
                         i < WatchListRepository.movies.length;
                         i++) {
                       BlocProvider.of<SaveAndFetchMovieCubit>(context)
-                          .saveMovie(widget.movie);
+                          .saveMovie(widget.movie, uid ?? "");
                       if (WatchListRepository.movies[i].description ==
                           widget.movie.description) {
                         break;
                       }
                       if (i == WatchListRepository.movies.length - 1) {
                         BlocProvider.of<SaveAndFetchMovieCubit>(context)
-                            .saveMovie(widget.movie);
+                            .saveMovie(widget.movie, uid ?? "");
                         WatchListRepository.movies.add(widget.movie);
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Text(

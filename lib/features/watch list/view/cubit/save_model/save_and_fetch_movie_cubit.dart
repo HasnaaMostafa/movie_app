@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_app/core/utils/constants.dart';
 import 'package:movie_app/features/home%20screen/view%20model/home_screen_view_model.dart';
 import 'package:movie_app/features/movie%20screen/view%20model/movie_info_repo.dart';
 
@@ -34,30 +33,31 @@ class SaveAndFetchMovieCubit extends Cubit<List<Movie>> {
     }
   }
 
-  Future<void> saveMovie(Movie movie) async {
+  Future<void> saveMovie(Movie movie, String uid) async {
     try {
       HomeScreenViewModel.resetVariables();
       List<String> recomendedMovieIDs =
           await RecomendedMovie.getRecomendedMoviesIDsForOneMovie(movie.id);
       // save recomended movies in user data by movie id as a key and list of recomended movies ids as a value
       // for example: {movie.id: [id1, id2, id3]}
-      await _firestore.collection('users').doc(uId).set({
+      await _firestore.collection('users').doc(uid).set({
         'recomendedMovies': {movie.id.toString(): recomendedMovieIDs}
       }, SetOptions(merge: true));
 
-      fetchMovies(uid: uId ?? "");
+      fetchMovies(uid: uid);
     } catch (error) {
       print('Error saving movie: $error');
     }
   }
 
-  Future<void> deleteMovie(Movie movie) async {
+  Future<void> deleteMovie(Movie movie, String uid) async {
     HomeScreenViewModel.resetVariables();
     try {
       // dete movie's id for the user data
-      await _firestore.collection('users').doc(uId).set({
+      await _firestore.collection('users').doc(uid).set({
         'movies': FieldValue.arrayRemove([movie.id])
       }, SetOptions(merge: true));
+      fetchMovies(uid: uid);
     } catch (error) {
       print('Error deleting movie: $error');
     }
