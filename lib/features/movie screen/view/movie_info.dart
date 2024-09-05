@@ -7,6 +7,7 @@ import 'package:movie_app/features/home%20screen/view/widgets/category_widget.da
 import 'package:movie_app/features/home%20screen/view/widgets/poster_widget.dart';
 import 'package:movie_app/features/movie%20screen/cubit/movie_info_state.dart';
 import 'package:movie_app/features/movie%20screen/view/widgets/category_text.dart';
+import 'package:movie_app/features/movie%20screen/view/widgets/web_view_screen.dart';
 
 import '../cubit/movie_info_cubit.dart';
 
@@ -53,13 +54,26 @@ class MovieInfoScreenState extends State<MovieInfoScreen> {
                             width: 1.sw,
                             fit: BoxFit.cover),
                         state.data.$2.homePageUrl!.isNotEmpty
-                            ? Container(
-                                color: Colors.black.withOpacity(0.4),
-                                child: Center(
-                                  child: Icon(
-                                    Icons.play_circle,
-                                    color: Colors.white,
-                                    size: 50.sp,
+                            ? GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => WebViewScreen(
+                                        url: state.data.$2.homePageUrl!,
+                                        movieName: widget.movie.title,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  color: Colors.black.withOpacity(0.4),
+                                  child: Center(
+                                    child: Icon(
+                                      Icons.play_circle,
+                                      color: Colors.white,
+                                      size: 50.sp,
+                                    ),
                                   ),
                                 ),
                               )
