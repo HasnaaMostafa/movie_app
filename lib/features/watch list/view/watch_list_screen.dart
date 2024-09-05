@@ -20,61 +20,67 @@ class WatchlistState extends State<Watchlist> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => WatchListCubit()..loadMovies(),
-        child: BlocBuilder<WatchListCubit, WatchListState>(
-          builder: (context, state) {
-            if (state is WatchListLoading) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (state is WatchListLoaded || state is WatchListInitial) {
-              return BlocBuilder<SaveAndFetchMovieCubit, List<Movie>>(
-                builder: (context, state) {
-                  return ListView.builder(
-                    padding: const EdgeInsets.all(10.0),
-                    itemCount: state.length,
-                    itemBuilder: (context, index) {
-                      final movie = state[index];
-                      return Dismissible(
-                        key: Key(movie.title),
-                        direction: DismissDirection.endToStart,
-                        onDismissed: (direction) {
-                          setState(() {
-                            WatchListRepository.movies.removeAt(index);
-                          });
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              duration: const Duration(seconds: 1),
-                              content: Text('${movie.title} removed'),
+      create: (context) => WatchListCubit()..loadMovies(),
+      child: BlocBuilder<WatchListCubit, WatchListState>(
+        builder: (context, state) {
+          if (state is WatchListLoading) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is WatchListLoaded || state is WatchListInitial) {
+            return BlocBuilder<SaveAndFetchMovieCubit, List<Movie>>(
+              builder: (context, movies) {
+                return ListView.builder(
+                  padding: const EdgeInsets.all(10.0),
+                  itemCount: movies.length,
+                  itemBuilder: (context, index) {
+                    final movie = movies[index];
+                    return Dismissible(
+                      key: Key(movie.title),
+                      direction: DismissDirection.endToStart,
+                      onDismissed: (direction) async {
+                        await context
+                            .read<SaveAndFetchMovieCubit>()
+                            .deleteMovie(movie);
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            duration: const Duration(seconds: 1),
+                            content: Text('${movie.title} removed'),
+                          ),
+                        );
+                      },
+                      background: Container(
+                        color: Colors.red,
+                        alignment: Alignment.centerRight,
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: const Icon(
+                          Icons.delete,
+                          color: Colors.white,
+                        ),
+                      ),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  MovieInfoScreen(movie: movie),
                             ),
                           );
                         },
-                        background: Container(
-                          color: Colors.red,
-                          alignment: Alignment.centerRight,
-                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                          child: const Icon(
-                            Icons.delete,
-                            color: Colors.white,
-                          ),
-                        ),
-                        child: GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          MovieInfoScreen(movie: movie)));
-                            },
-                            child: MovieCardWatchList(movie: movie)),
-                      );
-                    },
-                  );
-                },
-              );
-            } else if (state is WatchListError) {
-              return Center(child: Text(state.message));
-            }
-            return const SizedBox();
-          },
-        ));
+                        child: MovieCardWatchList(movie: movie),
+                      ),
+                    );
+                  },
+                );
+              },
+            );
+          } else if (state is WatchListError) {
+            return Center(child: Text(state.message));
+          }
+          return const SizedBox();
+        },
+      ),
+    );
   }
 }
+

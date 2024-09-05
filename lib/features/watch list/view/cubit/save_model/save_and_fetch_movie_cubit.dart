@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/utils/constants.dart';
+import 'package:movie_app/features/movie%20screen/view%20model/movie_info_repo.dart';
 
 import '../../../../../core/models/movie.dart';
 
@@ -11,12 +12,15 @@ class SaveAndFetchMovieCubit extends Cubit<List<Movie>> {
 
   Future<void> fetchMovies({required String uid}) async {
     try {
-      final snapshot = await _firestore
-          .collection('movies')
-          .where('userId', isEqualTo: uid)
-          .get();
-      final movies =
-          snapshot.docs.map((doc) => Movie.fromJson(doc.data())).toList();
+      final snapshot = await _firestore.collection('users').doc(uid).get();
+      final data = snapshot.data()?['movies'] ?? [];
+      List<Movie> movies = [];
+      for (var id in data) {
+        final movie =await MovieViewModel.getMovieInfo(id);
+        movies.add(movie);
+      }
+      print("----------------------nader-----------------------");
+      print(movies);
       emit(movies);
     } catch (error) {
       emit([]);
@@ -26,20 +30,25 @@ class SaveAndFetchMovieCubit extends Cubit<List<Movie>> {
 
   Future<void> saveMovie(Movie movie) async {
     try {
-      await _firestore.collection('movies').doc(movie.id.toString()).set({
-        'title': movie.title,
-        'id': movie.id,
-        'poster_path': movie.imageUrl,
-        'backdrop_path': movie.backgroundUrl,
-        'release_date': movie.releaseDate,
-        'vote_average': movie.rating,
-        'overview': movie.description,
-        'genre_ids': movie.categories.map((cat) => cat.id).toList(),
-        'userId': uId
-      });
+      // save movie's id for the user data
+      await _firestore.collection('users').doc(uId).set({
+        'movies': FieldValue.arrayUnion([movie.id])
+      }, SetOptions(merge: true));
       fetchMovies(uid: uId ?? "");
     } catch (error) {
       print('Error saving movie: $error');
     }
   }
+  Future<void> deleteMovie(Movie movie) async {
+    try {
+      // dete movie's id for the user data
+      await _firestore.collection('users').doc(uId).set({
+        'movies': FieldValue.arrayRemove([movie.id])
+      }, SetOptions(merge: true));
+    } catch (error) {
+      print('Error deleting movie: $error');
+    }
+  }
+
+
 }
