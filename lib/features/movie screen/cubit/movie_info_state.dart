@@ -1,7 +1,6 @@
-
 import 'package:movie_app/core/models/movie.dart';
 
-abstract class MovieInfoState   {
+abstract class MovieInfoState {
   const MovieInfoState();
 
   List<Object> get props => [];
@@ -16,12 +15,12 @@ class MovieInfoLoading extends MovieInfoState {
 }
 
 class MovieInfoLoaded extends MovieInfoState {
- 
-  final List<Movie> movies;
-  const MovieInfoLoaded( this.movies);
+  final ( List<Movie> ,  Movie ) data;
+  // final List<Movie> movies;
+  const MovieInfoLoaded(this.data);
 
   @override
-  List<Object> get props => [movies];
+  List<Object> get props => [data.$1, data.$2];
 }
 
 class MovieInfoError extends MovieInfoState {

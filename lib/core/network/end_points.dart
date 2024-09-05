@@ -9,12 +9,14 @@ class EndPoints {
       '/3/trending/movie/day?api_key=$apiKey&include_adult=false';
   static const String details = '/3/movie';
   static String similar(int movieId) =>
-      '/3/movie/$movieId/similar?api_key=$apiKey&include_adult=false';
+      '/3/movie/$movieId/recommendations?api_key=$apiKey&include_adult=false';
+  static String movieDetails(int movieId) =>
+      '/3/movie/$movieId?api_key=$apiKey&include_adult=false';
   static const String movieList = '/3/genre/movie/list';
   static const String discoverMovie = '/3/discover/movie';
   static String search(String query, int page) =>
       '/3/search/movie?query=$query&include_adult=false&language=en-US&page=$page&api_key=$apiKey';
-  static String categoryMovies(int id,int page) =>
+  static String categoryMovies(int id, int page) =>
       '/3/discover/movie?api_key=$apiKey&include_adult=false&with_genres=$id&language=en-US&page=$page';
 }
 // get category movies by id

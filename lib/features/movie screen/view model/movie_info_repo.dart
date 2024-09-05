@@ -17,6 +17,24 @@ class MovieViewModel {
 
     return movies;
   }
+
+  static Future<Movie> getMovieInfo(int movieId) async {
+    // await Future.delayed(const Duration(seconds: 2));
+    DioApiService dioApiService = DioApiService();
+    var response =
+        await dioApiService.getRequest(EndPoints.movieDetails(movieId));
+
+    Movie movie;
+    if (response.statusCode == 200) {
+      final data = response.data;
+      movie = Movie.fullDetailsFromJson(data);
+      // print(movie.homePageUrl);
+      // print(data);
+      return movie;
+    } else {
+      throw Exception('Failed to load movie');
+    }
+  }
 }
 /*
 {

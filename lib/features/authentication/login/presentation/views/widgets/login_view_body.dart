@@ -84,6 +84,18 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                     message: state.error.toString(), state: ToastStates.error);
               }
             }
+            if (state is LoginGoogleError) {
+              if (state.error.contains(
+                  "The supplied auth credential is incorrect, malformed or has expired")) {
+                showToast(
+                    message: "Email or Password is not correct",
+                    state: ToastStates.error);
+              } else {
+                showToast(
+                    message: state.error.toString(), state: ToastStates.error);
+                    print( state.error.toString());
+              }
+            }
           },
           child: Form(
             key: formKey,

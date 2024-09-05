@@ -1,5 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/core/utils/constants.dart';
+import 'package:movie_app/features/home%20screen/view%20model/home_screen_view_model.dart';
+import 'package:movie_app/features/movie%20screen/view%20model/movie_info_repo.dart';
 
 import '../../../../../core/models/movie.dart';
 
@@ -10,12 +13,20 @@ class SaveAndFetchMovieCubit extends Cubit<List<Movie>> {
 
   Future<void> fetchMovies({required String uid}) async {
     try {
-      final snapshot = await _firestore
-          .collection('movies')
-          .where('userId', isEqualTo: uid)
-          .get();
-      final movies =
-          snapshot.docs.map((doc) => Movie.fromJson(doc.data())).toList();
+      final snapshot = await _firestore.collection('users').doc(uid).get();
+      final data = snapshot.data()?['recomendedMovies'] ?? {};
+      List<Movie> movies = [];
+      List<int> ids = [];
+      // adding ids for saved movies as the keys of the recomended movies map in the user data
+      for (var id in data.keys) {
+        int intid = int.parse(id);
+        ids.add(intid);
+      }
+      for (var id in ids) {
+        final movie = await MovieViewModel.getMovieInfo(id);
+        movies.add(movie);
+      }
+
       emit(movies);
     } catch (error) {
       emit([]);
@@ -23,22 +34,32 @@ class SaveAndFetchMovieCubit extends Cubit<List<Movie>> {
     }
   }
 
-  Future<void> saveMovie(Movie movie, String uid) async {
+  Future<void> saveMovie(Movie movie) async {
     try {
-      await _firestore.collection('movies').doc(movie.id.toString()).set({
-        'title': movie.title,
-        'id': movie.id,
-        'poster_path': movie.imageUrl,
-        'backdrop_path': movie.backgroundUrl,
-        'release_date': movie.releaseDate,
-        'vote_average': movie.rating,
-        'overview': movie.description,
-        'genre_ids': movie.categories.map((cat) => cat.id).toList(),
-        'userId': uid
-      });
-      fetchMovies(uid: uid);
+      HomeScreenViewModel.resetVariables();
+      List<String> recomendedMovieIDs =
+          await RecomendedMovie.getRecomendedMoviesIDsForOneMovie(movie.id);
+      // save recomended movies in user data by movie id as a key and list of recomended movies ids as a value
+      // for example: {movie.id: [id1, id2, id3]}
+      await _firestore.collection('users').doc(uId).set({
+        'recomendedMovies': {movie.id.toString(): recomendedMovieIDs}
+      }, SetOptions(merge: true));
+
+      fetchMovies(uid: uId ?? "");
     } catch (error) {
       print('Error saving movie: $error');
+    }
+  }
+
+  Future<void> deleteMovie(Movie movie) async {
+    HomeScreenViewModel.resetVariables();
+    try {
+      // dete movie's id for the user data
+      await _firestore.collection('users').doc(uId).set({
+        'movies': FieldValue.arrayRemove([movie.id])
+      }, SetOptions(merge: true));
+    } catch (error) {
+      print('Error deleting movie: $error');
     }
   }
 }

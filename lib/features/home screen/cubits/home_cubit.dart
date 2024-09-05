@@ -7,67 +7,35 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeInitial());
 
   Future<void> fetchMovies() async {
-    await Future.delayed(const Duration(seconds: 3));
-
+    
+    if (HomeScreenViewModel.isloading) {
+      emit(HomeLoaded(
+          CachingLoadedData.bannerMovies,
+          CachingLoadedData.popularMovies,
+          CachingLoadedData.recommendedMovies));
+    return;
+    }
+    print("object==============================================");
+    print("===object==============================================");
+    print(HomeScreenViewModel.isloading);
+    print("====object==============================================");
+    // await Future.delayed(const Duration(seconds: 2));
+    await HomeScreenViewModel.fetchListOfIDsOfRecomendedMovies();
     // Example data
     final bannerMovies = await HomeScreenViewModel.featchingPopularMovies();
     final popularMovies = await HomeScreenViewModel.featchingBannerMovies();
-    final recommendedMovies = [
-      Movie(
-          id: 533535,
-          description:
-              "This is a description of the mois is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
-          rating: 8.92,
-          releaseDate: "1990",
-          title: 'Movie 5',
-          imageUrl:
-              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s'),
-      Movie(
-          id: 533535,
-          description:
-              "This is a description of the movie 6 This is a descriptmovie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
-          rating: 4,
-          releaseDate: "1990",
-          title: 'Movie 6',
-          imageUrl:
-              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s'),
-      Movie(
-          id: 533535,
-          description:
-              "This is a description of the movie 6 This is an of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
-          rating: 8.92,
-          releaseDate: "1990",
-          title: 'Movie 5',
-          imageUrl:
-              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s'),
-      Movie(
-          id: 533535,
-          description:
-              "This is a description of the movie 6 This ition of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
-          rating: 4,
-          releaseDate: "1990",
-          title: 'Movie 6',
-          imageUrl:
-              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s'),
-      Movie(
-          id: 533535,
-          description:
-              "This is a description of the movie 6 Thicription of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
-          rating: 8.92,
-          releaseDate: "1990",
-          title: 'Movie 5',
-          imageUrl:
-              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s'),
-      Movie(
-          id: 533535,
-          description:
-              "This is a description of the movie movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6This is a description of the movie 6 ",
-          rating: 4,
-          releaseDate: "1990",
-          title: 'Movie 6',
-          imageUrl:
-              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAyYvxzNliKlaETVVAiwNtjdSdASYafHcwDg&s'),
-    ];
+    final recommendedMovies =
+        await HomeScreenViewModel.featchingRecomendedMovies();
+    HomeScreenViewModel.isloading = true;
+    CachingLoadedData.bannerMovies = bannerMovies;
+    CachingLoadedData.popularMovies = popularMovies;
+    CachingLoadedData.recommendedMovies = recommendedMovies;
     emit(HomeLoaded(bannerMovies, popularMovies, recommendedMovies));
   }
+}
+
+class CachingLoadedData {
+  static List<Movie> bannerMovies = [];
+  static List<Movie> popularMovies = [];
+  static List<Movie> recommendedMovies = [];
 }
