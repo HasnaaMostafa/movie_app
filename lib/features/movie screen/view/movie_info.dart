@@ -28,9 +28,15 @@ class MovieInfoScreenState extends State<MovieInfoScreen> {
     return BlocBuilder<MovieInfoCubit, MovieInfoState>(
       builder: (context, state) {
         if (state is MovieInfoLoading) {
-          return const Scaffold(
-              body: Center(child: MovieInfoShimmer()));
+          return const Scaffold(body: Center(child: MovieInfoShimmer()));
         } else if (state is MovieInfoLoaded) {
+          try {
+            print("------nader---------");
+            print(state.data.$2.homePageUrl ?? "");
+          } catch (e) {
+            print("------nader---------");
+            print(e);
+          }
           return Scaffold(
             resizeToAvoidBottomInset: false,
             appBar: AppBar(
@@ -238,7 +244,7 @@ class MovieInfoScreenState extends State<MovieInfoScreen> {
             ),
           );
         } else if (state is MovieInfoError) {
-          return Center(child: Text(state.message));
+          return Scaffold(body: Center(child: Text("Sorry, Error in loading Movie Information.")));
         }
         return const SizedBox();
       },

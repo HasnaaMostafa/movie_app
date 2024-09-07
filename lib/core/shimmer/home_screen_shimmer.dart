@@ -31,7 +31,7 @@ class HomeScreenShimmer extends StatelessWidget {
                         for (int i = 0; i < 5; i++)
                           const Padding(
                             padding: EdgeInsets.all(8.0),
-                            child: ShimmerLoaderEffect(width: 100, height: 150),
+                            child: ShimmerLoaderEffect(width: 100, height: 120),
                           ),
                       ],
                     ),
@@ -57,7 +57,7 @@ class HomeScreenShimmer extends StatelessWidget {
                         for (int i = 0; i < 5; i++)
                           const Padding(
                             padding: EdgeInsets.all(8.0),
-                            child: ShimmerLoaderEffect(width: 120, height: 220),
+                            child: ShimmerLoaderEffect(width: 100, height: 130),
                           ),
                       ],
                     ),

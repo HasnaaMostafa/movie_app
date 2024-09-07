@@ -6,6 +6,8 @@ import 'package:movie_app/features/home%20screen/cubits/home_state.dart';
 import 'package:movie_app/features/home%20screen/view%20model/home_screen_view_model.dart';
 import 'package:movie_app/features/home%20screen/view/widgets/banner_view.dart';
 import 'package:movie_app/features/home%20screen/view/widgets/category_widget.dart';
+import 'package:movie_app/features/movie%20screen/cubit/movie_info_cubit.dart';
+import 'package:movie_app/features/movie%20screen/view/movie_info.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -28,10 +30,27 @@ class HomeScreen extends StatelessWidget {
                         title: model.firstCagtegory,
                         movies: state.popularMovies,
                       ),
-                      CategorySection(
-                        title: model.secondCategoryText,
-                        movies: state.recommendedMovies,
-                        withMoreInfoForMovieCard: true,
+                      GestureDetector(
+                        onTap: () {
+                          var movie;
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => BlocProvider(
+                                create: (context) => MovieInfoCubit()
+                                  ..loadSimilarMovies(movie.id),
+                                child: MovieInfoScreen(
+                                  movie: movie,
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                        child: CategorySection(
+                          title: model.secondCategoryText,
+                          movies: state.recommendedMovies,
+                          withMoreInfoForMovieCard: true,
+                        ),
                       ),
                     ],
                   ),
