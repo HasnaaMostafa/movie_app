@@ -83,7 +83,7 @@ class RecomendedMovie {
     print(ids);
     List<Movie> movies = [];
     int numberOfMoviesFromEachMovie =
-        (((1 / ids.length)) * ids[0].length).toInt();
+        (((1 / ids.length)) * 10).toInt();
     // if the number of movies from each movie is 0 then we will get one movie from each movie
     // it may happen if the number of movies is less than the number of movies we want to get from each movie
     numberOfMoviesFromEachMovie == 0 ? numberOfMoviesFromEachMovie = 1 : null;
