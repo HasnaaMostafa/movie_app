@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/features/home%20screen/view%20model/home_screen_view_model.dart';
+import 'package:movie_app/features/home%20screen/view%20model/recomended_controller.dart';
 import 'package:movie_app/features/movie%20screen/view%20model/movie_info_repo.dart';
 
 import '../../../../../core/models/movie.dart';
