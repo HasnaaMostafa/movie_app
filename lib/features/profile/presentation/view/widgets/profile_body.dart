@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/core/utils/app_colors.dart';
 import 'package:movie_app/features/edit_profile/presentation/manager/edit_profile_cubit.dart';
 import 'package:movie_app/features/edit_profile/presentation/views/edit_profile_view.dart';
 
@@ -41,7 +42,7 @@ class ProfileBody extends StatelessWidget {
                   child: const Icon(
                     Icons.edit,
                     size: 22,
-                    color: Color(0xffB7950B),
+                    color: AppColors.primaryColor,
                   ),
                 ),
               );
@@ -67,6 +68,7 @@ class ProfileBody extends StatelessWidget {
                       children: [
                         CircleAvatar(
                           radius: 50,
+                          backgroundColor: Colors.grey.shade800,
                           backgroundImage: userModel?.image != null
                               ? NetworkImage(userModel!.image!)
                               : const AssetImage('assets/images/profile.jpg')
