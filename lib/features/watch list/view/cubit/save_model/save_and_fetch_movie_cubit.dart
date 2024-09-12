@@ -53,15 +53,12 @@ class SaveAndFetchMovieCubit extends Cubit<List<Movie>> {
 
   Future<void> deleteMovie(Movie movie, String uid) async {
     HomeScreenViewModel.resetVariables();
-    try{
-    await _firestore.collection('users').doc(uid).update({
-      'recomendedMovies.${movie.id.toString()}': FieldValue.delete()
-    });
-    fetchMovies(uid: uid);
-
+    try {
+      await _firestore.collection('users').doc(uid).update(
+          {'recomendedMovies.${movie.id.toString()}': FieldValue.delete()});
+      fetchMovies(uid: uid);
     } catch (error) {
       print('Error saving movie: $error');
     }
   }
-
 }
