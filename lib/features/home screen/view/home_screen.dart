@@ -30,27 +30,10 @@ class HomeScreen extends StatelessWidget {
                         title: model.firstCagtegory,
                         movies: state.popularMovies,
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          var movie;
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => BlocProvider(
-                                create: (context) => MovieInfoCubit()
-                                  ..loadSimilarMovies(movie.id),
-                                child: MovieInfoScreen(
-                                  movie: movie,
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                        child: CategorySection(
-                          title: model.secondCategoryText,
-                          movies: state.recommendedMovies,
-                          withMoreInfoForMovieCard: true,
-                        ),
+                      CategorySection(
+                        title: model.secondCategoryText,
+                        movies: state.recommendedMovies,
+                        withMoreInfoForMovieCard: true,
                       ),
                     ],
                   ),

@@ -27,8 +27,8 @@ class HomeCubit extends Cubit<HomeState> {
 
     final bannerMovies = await HomeScreenViewModel.featchingPopularMovies();
     final popularMovies = await HomeScreenViewModel.featchingBannerMovies();
-    final List<Movie>  recommendedMovies = [];
-    // await HomeScreenViewModel.featchingRecomendedMovies();
+    final List<Movie>  recommendedMovies = 
+    await HomeScreenViewModel.featchingRecomendedMovies();
 
     HomeScreenViewModel.isloading = true;
     CachingLoadedData.bannerMovies = bannerMovies;

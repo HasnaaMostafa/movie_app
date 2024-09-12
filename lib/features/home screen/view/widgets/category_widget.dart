@@ -42,7 +42,7 @@ class CategorySection extends StatelessWidget {
                     return MovieCardRecommend(
                       movie: movie,
                       onPress: () {
-                        Navigator.pushReplacement(
+                        Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => BlocProvider(
