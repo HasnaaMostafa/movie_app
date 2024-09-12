@@ -12,9 +12,19 @@ class RecomendedMovie {
     if (ids.isEmpty) {
       return [];
     }
-    print(ids);
+    int n = ids.length;
+    for (var i = 0; i < ids.length; i++) {
+      if(ids[i].isEmpty){
+        n--;
+      }
+    }
+    if (n == 0) {
+      return [];
+    }
+
+    // print(ids);
     List<Movie> movies = [];
-    int numberOfMoviesFromEachMovie = (((1 / ids.length)) * 10).toInt();
+    int numberOfMoviesFromEachMovie = (((1 / n)) * 10).toInt();
     // if the number of movies from each movie is 0 then we will get one movie from each movie
     // it may happen if the number of movies is less than the number of movies we want to get from each movie
     numberOfMoviesFromEachMovie == 0 ? numberOfMoviesFromEachMovie = 1 : null;
@@ -22,7 +32,7 @@ class RecomendedMovie {
       for (int i = 0; i < numberOfMoviesFromEachMovie && i < id.length; i++) {
         final movie = await MovieViewModel.getMovieInfo(id[i]);
         movies.add(movie);
-        print(movie.title);
+        // print(movie.title);
       }
     }
     return movies;
