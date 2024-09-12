@@ -94,10 +94,8 @@ class ProfileBody extends StatelessWidget {
                 ),
               ),
             ),
-            const Text(
-              "Saved Movies",
-              style: TextStyle(fontSize: 15),
-            ),
+            const Text("Saved Movies",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             const Expanded(flex: 5, child: Watchlist()),
           ],
         ),
