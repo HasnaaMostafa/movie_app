@@ -40,7 +40,7 @@ void main() async {
   uId = CacheHelper.getData(key: "uid");
 
   if (uId != null) {
-    widget = const NavMenuScreen();
+    widget = const IntroView();
   } else {
     widget = const IntroView();
   }

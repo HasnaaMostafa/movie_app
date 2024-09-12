@@ -9,6 +9,8 @@
 .history
 .svn/
 migrate_working_dir/
+# ignores upload key file
+android/app/upload-keystore.jks
 
 # IntelliJ related
 *.iml
