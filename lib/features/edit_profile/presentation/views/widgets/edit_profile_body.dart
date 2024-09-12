@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/core/utils/app_colors.dart';
 import 'package:movie_app/features/authentication/login/presentation/manager/logout_cubit/logout_cubit.dart';
 import 'package:movie_app/features/authentication/login/presentation/views/login_view.dart';
 import 'package:movie_app/features/edit_profile/presentation/manager/edit_profile_cubit.dart';
@@ -74,7 +75,7 @@ class _EditProfileBodyState extends State<EditProfileBody> {
                   child: const Icon(
                     Icons.check,
                     size: 25,
-                    color: Color(0xffB7950B),
+                    color: AppColors.primaryColor,
                   ),
                 ),
               ),
@@ -98,6 +99,7 @@ class _EditProfileBodyState extends State<EditProfileBody> {
                           children: [
                             CircleAvatar(
                               radius: 50,
+                              backgroundColor: Colors.grey.shade800,
                               backgroundImage: profileImage == null
                                   ? widget.userModel?.image == null
                                       ? const AssetImage(
@@ -166,8 +168,8 @@ class _EditProfileBodyState extends State<EditProfileBody> {
                             width: 200,
                             child: ElevatedButton(
                                 style: const ButtonStyle(
-                                    backgroundColor:
-                                        WidgetStatePropertyAll(Colors.red)),
+                                    backgroundColor: WidgetStatePropertyAll(
+                                        AppColors.primaryColor)),
                                 onPressed: () async {
                                   await BlocProvider.of<LogoutCubit>(context)
                                       .logout();

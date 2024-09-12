@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/core/utils/app_colors.dart';
 import 'package:movie_app/features/home%20screen/view/home_screen.dart';
 import 'package:movie_app/features/profile/presentation/view/profile_view.dart';
 import 'package:movie_app/features/search%20screen/cubit/search_cubit.dart';
@@ -60,7 +61,7 @@ class NavMenuScreenState extends State<NavMenuScreen> {
             ),
           ],
           currentIndex: _selectedIndex,
-          selectedItemColor: Colors.amber,
+          selectedItemColor: AppColors.primaryColor,
           unselectedItemColor: Colors.grey,
           backgroundColor: Theme.of(context).brightness == Brightness.dark
               ? Colors.grey[700]

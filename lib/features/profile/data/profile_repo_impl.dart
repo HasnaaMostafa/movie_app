@@ -13,8 +13,7 @@ class ProfileRepoImpl implements ProfileRepo {
   @override
   Future<Either<Failure, UserModel>> getUserData({required String uid}) async {
     try {
-      var userDoc =
-          await fireStore.collection("users").doc(uid).get().then((value) {
+      await fireStore.collection("users").doc(uid).get().then((value) {
         userModel = UserModel.fromJson(value.data()!);
       });
       return right(userModel!);

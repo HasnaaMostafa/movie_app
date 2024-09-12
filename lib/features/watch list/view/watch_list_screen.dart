@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/helper/cache_helper.dart';
+import 'package:movie_app/core/utils/app_colors.dart';
 import 'package:movie_app/features/movie%20screen/view/movie_info.dart';
 import 'package:movie_app/features/watch%20list/view/cubit/save_model/save_and_fetch_movie_cubit.dart';
 import 'package:movie_app/features/watch%20list/view/cubit/watch_list_cubit.dart';
@@ -47,7 +48,6 @@ class WatchlistState extends State<Watchlist> {
                         await context
                             .read<SaveAndFetchMovieCubit>()
                             .deleteMovie(movie, uid ?? "");
-
                         setState(() {
                           movies.removeAt(index);
                         });
@@ -59,7 +59,7 @@ class WatchlistState extends State<Watchlist> {
                         );
                       },
                       background: Container(
-                        color: Colors.red,
+                        color: AppColors.primaryColor,
                         alignment: Alignment.centerRight,
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
                         child: const Icon(

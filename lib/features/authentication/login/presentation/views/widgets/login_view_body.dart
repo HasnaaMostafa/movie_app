@@ -27,10 +27,11 @@ class _LoginViewBodyState extends State<LoginViewBody> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         centerTitle: true,
         title: const Padding(
-          padding: EdgeInsets.only(right: 50.0),
+          padding: EdgeInsets.only(right: 50.0, left: 50),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -93,7 +94,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
               } else {
                 showToast(
                     message: state.error.toString(), state: ToastStates.error);
-                    print( state.error.toString());
+                print(state.error.toString());
               }
             }
           },
