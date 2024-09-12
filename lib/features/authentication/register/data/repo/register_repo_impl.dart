@@ -56,7 +56,7 @@ class RegisterRepoImpl implements RegisterRepo {
         uId: uId,
         bio: "write you bio...",
         isEmailVerified: false,
-        image: "",
+        image: "https://static.vecteezy.com/system/resources/previews/009/992/319/non_2x/people-icon-sign-symbol-design-free-png.png",
         cover: "",
         isAgree: isAgree);
     FirebaseFirestore.instance
