@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/helper/cache_helper.dart';
 import 'package:movie_app/core/utils/app_colors.dart';
+import 'package:movie_app/features/movie%20screen/cubit/movie_info_cubit.dart';
 import 'package:movie_app/features/movie%20screen/view/movie_info.dart';
 import 'package:movie_app/features/watch%20list/view/cubit/save_model/save_and_fetch_movie_cubit.dart';
 import 'package:movie_app/features/watch%20list/view/cubit/watch_list_cubit.dart';
@@ -72,8 +73,13 @@ class WatchlistState extends State<Watchlist> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  MovieInfoScreen(movie: movie),
+                              builder: (context) => BlocProvider(
+                                create: (context) => MovieInfoCubit()
+                                  ..loadSimilarMovies(movie.id),
+                                child: MovieInfoScreen(
+                                  movie: movie,
+                                ),
+                              ),
                             ),
                           );
                         },
