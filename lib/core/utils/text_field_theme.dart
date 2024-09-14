@@ -7,6 +7,7 @@ class TTextFormFieldTheme {
 
   static InputDecorationTheme lightInputDecorationTheme = InputDecorationTheme(
     border: const OutlineInputBorder().copyWith(
+      
       borderRadius: BorderRadius.circular(TSizes.inputFieldRadius),
     ),
  
@@ -14,6 +15,7 @@ class TTextFormFieldTheme {
 
   static InputDecorationTheme darkInputDecorationTheme = InputDecorationTheme(
     border: const OutlineInputBorder().copyWith(
+      
       borderRadius: BorderRadius.circular(TSizes.inputFieldRadius),
     ),
 

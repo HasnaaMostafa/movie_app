@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/core/models/movie.dart';
 import 'package:movie_app/core/shimmer/movie_info_shimmer.dart';
+import 'package:movie_app/core/utils/app_colors.dart';
 import 'package:movie_app/features/home%20screen/view/widgets/category_widget.dart';
 import 'package:movie_app/features/home%20screen/view/widgets/poster_widget.dart';
 import 'package:movie_app/features/movie%20screen/cubit/movie_info_state.dart';
@@ -97,8 +98,10 @@ class MovieInfoScreenState extends State<MovieInfoScreen> {
                             widget.movie.title,
                             style: Theme.of(context)
                                 .textTheme
-                                .headlineLarge
-                                ?.copyWith(fontSize: 18.sp),
+                                .headlineMedium
+                                ?.copyWith(
+                                    fontSize: 20.sp,
+                                    color: AppColors.primaryColor),
                           ),
                           Text(
                               "Original Title: ${state.data.$2.originalTitle ?? ""}",
@@ -244,7 +247,9 @@ class MovieInfoScreenState extends State<MovieInfoScreen> {
             ),
           );
         } else if (state is MovieInfoError) {
-          return Scaffold(body: Center(child: Text("Sorry, Error in loading Movie Information.")));
+          return const Scaffold(
+              body: Center(
+                  child: Text("Sorry, Error in loading Movie Information.")));
         }
         return const SizedBox();
       },

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/core/models/movie.dart';
+import 'package:movie_app/core/utils/app_colors.dart';
 import 'package:movie_app/features/home%20screen/view/widgets/poster_widget.dart';
 import 'package:movie_app/features/movie%20screen/cubit/movie_info_cubit.dart';
 import 'package:movie_app/features/movie%20screen/view/movie_info.dart';
@@ -120,14 +121,19 @@ class BannerViewState extends State<BannerView> {
                                 style: Theme.of(context)
                                     .textTheme
                                     .headlineMedium
-                                    ?.copyWith(fontSize: 15.sp),
+                                    ?.copyWith(
+                                        fontSize: 15.sp,
+                                        color: AppColors.primaryColor),
                               ),
                             ),
                             Padding(
                               padding: EdgeInsets.only(top: 8.h),
                               child: Text(
                                 widget.movies[index].releaseDate,
-                                style: Theme.of(context).textTheme.titleMedium,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineMedium
+                                    ?.copyWith(color: AppColors.black),
                               ),
                             )
                           ],
