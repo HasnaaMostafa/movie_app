@@ -4,7 +4,6 @@ import 'package:movie_app/core/models/movie.dart';
 import 'package:movie_app/core/network/dio_network.dart';
 import 'package:movie_app/core/network/end_points.dart';
 import 'package:movie_app/features/home%20screen/view%20model/recomended_controller.dart';
-import 'package:movie_app/features/movie%20screen/view%20model/movie_info_repo.dart';
 
 class HomeScreenViewModel {
   static List<List<int>> ids = [];
