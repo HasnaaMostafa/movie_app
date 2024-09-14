@@ -36,9 +36,11 @@ class MovieCardWatchList extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    movie.title,
+                    movie.title.length > 26
+                        ? '${movie.title.substring(0, 26)}...'
+                        : movie.title,
                     style: const TextStyle(
-                      fontSize: 18.0,
+                      fontSize: 16.0,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
