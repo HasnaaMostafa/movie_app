@@ -14,7 +14,7 @@ class RecomendedMovie {
     }
     int n = ids.length;
     for (var i = 0; i < ids.length; i++) {
-      if(ids[i].isEmpty){
+      if (ids[i].isEmpty) {
         n--;
       }
     }
@@ -23,18 +23,37 @@ class RecomendedMovie {
     }
 
     // print(ids);
-    List<Movie> movies = [];
-    int numberOfMoviesFromEachMovie = (((1 / n)) * 10).toInt();
-    // if the number of movies from each movie is 0 then we will get one movie from each movie
-    // it may happen if the number of movies is less than the number of movies we want to get from each movie
-    numberOfMoviesFromEachMovie == 0 ? numberOfMoviesFromEachMovie = 1 : null;
-    for (var id in ids) {
-      for (int i = 0; i < numberOfMoviesFromEachMovie && i < id.length; i++) {
-        final movie = await MovieViewModel.getMovieInfo(id[i]);
-        movies.add(movie);
-        // print(movie.title);
+    List<int> recommendedMoviesIDs = [];
+    // I need to check if all lists are empty and movies < 10 then I will return the movies I have
+
+    while (recommendedMoviesIDs.length < 10 && n > 0) {
+      for (var i = 0; i < ids.length && recommendedMoviesIDs.length < 10; i++) {
+        if (ids[i].isEmpty) {
+          continue;
+        }
+        if (!recommendedMoviesIDs.contains(ids[i].first) 
+        // &&
+            // !recommendedMoviesIDs.contains(ids[i])
+            ) {
+          recommendedMoviesIDs.add(ids[i].removeAt(0));
+          if (ids[i].isEmpty) {
+            n--;
+          }
+        } else {
+          ids[i].removeAt(0);
+          if (ids[i].isEmpty) {
+            n--;
+          }
+        }
       }
     }
+
+    List<Movie> movies = [];
+    for (var id in recommendedMoviesIDs) {
+      final movie = await MovieViewModel.getMovieInfo(id);
+      movies.add(movie);
+    }
+
     return movies;
   }
 }
