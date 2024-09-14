@@ -37,47 +37,60 @@ class CategorySection extends StatelessWidget {
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                children: movies.map((movie) {
-                  if (withMoreInfoForMovieCard ?? false) {
-                    return MovieCardRecommend(
-                      movie: movie,
-                      onPress: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => BlocProvider(
-                              create: (context) => MovieInfoCubit()
-                                ..loadSimilarMovies(
-                                    movie.id),
-                              child: MovieInfoScreen(
-                                movie: movie,
-                              ),
+                children: movies.isEmpty
+                    ? [
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          height: 80.h,
+                          child: Center(
+                            child: Text(
+                              textAlign: TextAlign.center,
+                              "No recomended movies avaliable fot your watch list.\nTry to add some movies.",
+                              style: TextStyle(
+                                  fontSize: 14, color: Colors.grey[600]),
                             ),
                           ),
-                        );
-                        // print(movie.title);
-                      },
-                    );
-                  } else {
-                    return MovieCard(
-                        movie: movie,
-                        onPress: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => BlocProvider(
-                                create: (context) => MovieInfoCubit()
-                                ..loadSimilarMovies(
-                                    movie.id),
-                                child: MovieInfoScreen(
-                                  movie: movie,
+                        )
+                      ]
+                    : movies.map((movie) {
+                        if (withMoreInfoForMovieCard ?? false) {
+                          return MovieCardRecommend(
+                            movie: movie,
+                            onPress: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => BlocProvider(
+                                    create: (context) => MovieInfoCubit()
+                                      ..loadSimilarMovies(movie.id),
+                                    child: MovieInfoScreen(
+                                      movie: movie,
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
+                              );
+                              // print(movie.title);
+                            },
                           );
-                        });
-                  }
-                }).toList(),
+                        } else {
+                          return MovieCard(
+                              movie: movie,
+                              onPress: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => BlocProvider(
+                                      create: (context) => MovieInfoCubit()
+                                        ..loadSimilarMovies(movie.id),
+                                      child: MovieInfoScreen(
+                                        movie: movie,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              });
+                        }
+                      }).toList(),
               ),
             ),
           ],
