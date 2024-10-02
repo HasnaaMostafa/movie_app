@@ -83,7 +83,6 @@ class _PosterWidgetState extends State<PosterWidget> {
                   child: const Icon(
                     size: 40,
                     Icons.bookmark_add,
-                    color: Colors.white,
                   ),
                 )),
           ],

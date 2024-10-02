@@ -23,11 +23,11 @@ class CustomButton extends StatelessWidget {
               elevation: 4,
               backgroundColor: const Color(0xffeb0101),
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12))),
+                  borderRadius: BorderRadius.circular(9))),
           onPressed: onPressed,
           child: Text(
             text,
-            style: const TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.white, fontSize: 18),
           )),
     );
   }

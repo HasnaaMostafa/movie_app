@@ -10,7 +10,7 @@ void showToast({
       toastLength: Toast.LENGTH_LONG,
       gravity: ToastGravity.BOTTOM,
       backgroundColor: chooseToastColor(state),
-      textColor: Colors.white,
+      textColor: Colors.black,
       fontSize: 15,
     );
 
@@ -30,7 +30,6 @@ Color chooseToastColor(ToastStates state) {
     case ToastStates.warning:
       color = Colors.amber;
       break;
-
 
     case ToastStates.note:
       color = Colors.grey;

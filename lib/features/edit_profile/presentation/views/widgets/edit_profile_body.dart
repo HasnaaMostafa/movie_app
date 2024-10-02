@@ -123,7 +123,7 @@ class _EditProfileBodyState extends State<EditProfileBody> {
                                   child: Icon(
                                     Icons.camera_alt,
                                     size: 15,
-                                    color: Colors.white,
+                                    color: Colors.black,
                                   ),
                                 ),
                               ),
@@ -163,21 +163,27 @@ class _EditProfileBodyState extends State<EditProfileBody> {
                                   ((Route<dynamic> route) => false));
                             }
                           },
-                          child: SizedBox(
-                            height: 50,
-                            width: 200,
-                            child: ElevatedButton(
-                                style: const ButtonStyle(
-                                    backgroundColor: WidgetStatePropertyAll(
-                                        AppColors.primaryColor)),
-                                onPressed: () async {
-                                  await BlocProvider.of<LogoutCubit>(context)
-                                      .logout();
-                                },
-                                child: const Text(
-                                  "Log Out",
-                                  style: TextStyle(color: Colors.white),
-                                )),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: SizedBox(
+                              height: 60,
+                              width: 350,
+                              child: ElevatedButton(
+                                  style: const ButtonStyle(
+                                      backgroundColor: WidgetStatePropertyAll(
+                                          AppColors.primaryColor)),
+                                  onPressed: () async {
+                                    await BlocProvider.of<LogoutCubit>(context)
+                                        .logout();
+                                  },
+                                  child: const Text(
+                                    "Log Out",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                    ),
+                                  )),
+                            ),
                           ),
                         )
                       ],

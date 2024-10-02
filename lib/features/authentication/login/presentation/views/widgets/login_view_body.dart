@@ -28,7 +28,6 @@ class _LoginViewBodyState extends State<LoginViewBody> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.transparent,
         centerTitle: true,
         title: const Padding(
           padding: EdgeInsets.only(right: 50.0, left: 50),
@@ -37,14 +36,15 @@ class _LoginViewBodyState extends State<LoginViewBody> {
             children: [
               Text(
                 "Movie",
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(fontSize: 25),
               ),
-              Text("zone", style: TextStyle(color: Color(0xffea0101))),
+              Text("zone",
+                  style: TextStyle(color: Color(0xffea0101), fontSize: 25)),
             ],
           ),
         ),
       ),
-      backgroundColor: const Color(0xff1d1d1d),
+      // backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.only(top: 50.0, right: 20, left: 20),
         child: BlocListener<LoginCubit, LoginState>(
@@ -107,7 +107,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                 children: [
                   const Text(
                     "Welcome Back!",
-                    style: TextStyle(color: Colors.white, fontSize: 25),
+                    style: TextStyle(fontSize: 25),
                   ),
                   const SizedBox(
                     height: 20,
@@ -117,17 +117,17 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                     child: Text(
                       textAlign: TextAlign.center,
                       "please sign in to your account to continue",
-                      style: TextStyle(color: Color(0xffc4c4c4), fontSize: 14),
+                      style: TextStyle(fontSize: 16),
                     ),
                   ),
                   const SizedBox(
                     height: 50,
                   ),
                   CustomTextField(
-                    controller: emailController,
-                    hintText: "Email / Phone Number",
-                    hintStyle: const TextStyle(color: Color(0xff7f7f80)),
-                  ),
+                      controller: emailController,
+                      hintText: "Email / Phone Number",
+                      hintStyle:
+                          const TextStyle( fontSize: 16)),
                   BlocBuilder<PasswordVisibilityCubit, bool>(
                     builder: (context, state) {
                       return CustomTextField(
@@ -150,7 +150,8 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                               ),
                             )),
                         hintText: "Password",
-                        hintStyle: const TextStyle(color: Color(0xff7f7f80)),
+                        hintStyle:
+                            const TextStyle( fontSize: 16),
                       );
                     },
                   ),
@@ -158,8 +159,8 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                     height: 50,
                   ),
                   CustomButton(
-                    height: 45,
-                    width: 150,
+                    height: 60,
+                    width: double.infinity,
                     text: "Log in",
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
@@ -175,7 +176,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                   const Center(
                       child: Text("OR",
                           style: TextStyle(
-                            color: Color(0xffd4d4d4),
+                           
                             fontSize: 15,
                           ))),
                   const SizedBox(
@@ -195,8 +196,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                     children: [
                       const Text(
                         "Not registered yet?",
-                        style:
-                            TextStyle(color: Color(0xffd4d4d4), fontSize: 15),
+                        style: TextStyle(fontSize: 15),
                       ),
                       GestureDetector(
                         onTap: () {

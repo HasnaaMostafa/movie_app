@@ -54,13 +54,16 @@ class CustomTextField extends StatelessWidget {
               onChanged: onChanged,
               onFieldSubmitted: onFieldSubmitted,
               obscureText: isPassword ?? false,
-              style: const TextStyle(color: Color(0xff767678)),
+              style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 18,
+                  fontWeight: FontWeight.normal),
               decoration: InputDecoration(
                 contentPadding:
                     const EdgeInsets.only(left: 19, top: 18, bottom: 18),
                 hintText: hintText,
                 hintStyle: hintStyle,
-                fillColor: const Color(0xff232325),
+                fillColor: Colors.white,
                 filled: true,
                 suffixIcon: suffix,
                 enabledBorder: OutlineInputBorder(

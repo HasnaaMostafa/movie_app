@@ -133,7 +133,7 @@ class BannerViewState extends State<BannerView> {
                                 style: Theme.of(context)
                                     .textTheme
                                     .headlineMedium
-                                    ?.copyWith(color: AppColors.black),
+                                    
                               ),
                             )
                           ],

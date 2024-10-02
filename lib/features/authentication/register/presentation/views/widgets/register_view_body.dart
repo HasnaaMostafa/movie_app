@@ -40,15 +40,16 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
             children: [
               Text(
                 "Movie",
-                style: TextStyle(color: Colors.white),
+                style: TextStyle( fontSize: 25),
               ),
-              Text("zone", style: TextStyle(color: Color(0xffea0101))),
+              Text("zone",
+                  style: TextStyle(color: Color(0xffea0101), fontSize: 25)),
             ],
           ),
         ),
         actions: const [Text("")],
       ),
-      backgroundColor: const Color(0xff1d1d1d),
+      // backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.only(top: 50.0, right: 20, left: 20),
         child: BlocListener<LoginCubit, LoginState>(
@@ -105,7 +106,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                   children: [
                     const Text(
                       "Create Account",
-                      style: TextStyle(color: Colors.white, fontSize: 25),
+                      style: TextStyle( fontSize: 25),
                     ),
                     const SizedBox(
                       height: 20,
@@ -115,8 +116,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                       child: Text(
                         textAlign: TextAlign.center,
                         "Let's get you started and create account",
-                        style:
-                            TextStyle(color: Color(0xffc4c4c4), fontSize: 14),
+                        style: TextStyle( fontSize: 14),
                       ),
                     ),
                     const SizedBox(
@@ -170,7 +170,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Checkbox(
-                          fillColor: WidgetStateProperty.all(Colors.white),
+                          fillColor: WidgetStateProperty.all(Colors.black),
                           value: isChecked,
                           checkColor: const Color(0xffb60808),
                           onChanged: (value) {
@@ -187,7 +187,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                                 TextSpan(
                                   text:
                                       "Yes,I understand and agree to Moviezone Terms of service , including the ",
-                                  style: TextStyle(color: Colors.white),
+                                  style: TextStyle(),
                                 ),
                                 TextSpan(
                                   text: " User Agreement and Privacy Policy",
@@ -195,7 +195,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                                 ),
                                 TextSpan(
                                   text: ".",
-                                  style: TextStyle(color: Colors.white),
+                                  style: TextStyle(),
                                 ),
                               ],
                             ),
@@ -207,8 +207,8 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                       height: 30,
                     ),
                     CustomButton(
-                      height: 45,
-                      width: 150,
+                      height: 60,
+                      width: double.infinity,
                       text: "Sign up",
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
@@ -235,7 +235,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                     const Center(
                         child: Text("OR",
                             style: TextStyle(
-                              color: Color(0xffd4d4d4),
+                              
                               fontSize: 15,
                             ))),
                     const SizedBox(
@@ -255,8 +255,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                       children: [
                         const Text(
                           "Already have an account?",
-                          style:
-                              TextStyle(color: Color(0xffd4d4d4), fontSize: 15),
+                          style: TextStyle(fontSize: 15),
                         ),
                         GestureDetector(
                           onTap: () {

@@ -56,7 +56,7 @@ class WatchlistState extends State<Watchlist> {
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: const Icon(
                   Icons.delete,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
               ),
               child: GestureDetector(

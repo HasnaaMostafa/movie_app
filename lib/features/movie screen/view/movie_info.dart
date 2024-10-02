@@ -78,7 +78,7 @@ class MovieInfoScreenState extends State<MovieInfoScreen> {
                                   child: Center(
                                     child: Icon(
                                       Icons.play_circle,
-                                      color: Colors.white,
+                                      color: Colors.black,
                                       size: 50.sp,
                                     ),
                                   ),

@@ -8,7 +8,7 @@ class IntroView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff1d1d1d),
+      // backgroundColor: Colors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -19,7 +19,7 @@ class IntroView extends StatelessWidget {
                 Text(
                   "Movie",
                   style: TextStyle(
-                      color: Colors.white,
+                      
                       fontSize: 30,
                       fontWeight: FontWeight.bold),
                 ),
@@ -35,14 +35,14 @@ class IntroView extends StatelessWidget {
             ),
             const Text(
               "Your number one destination",
-              style: TextStyle(color: Colors.white, fontSize: 20),
+              style: TextStyle( fontSize: 20),
             ),
             const SizedBox(
               height: 20,
             ),
             CustomButton(
-              width: 170,
-              height: 45,
+              width: 300,
+              height: 60,
               text: "Watch Movies",
               onPressed: () {
                 Navigator.push(

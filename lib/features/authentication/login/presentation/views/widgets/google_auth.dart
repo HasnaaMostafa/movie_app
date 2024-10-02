@@ -13,12 +13,12 @@ class GoogleAuth extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 40,
+      height: 60,
       child: ElevatedButton(
           style: ElevatedButton.styleFrom(
               backgroundColor: Colors.white,
               shape: RoundedRectangleBorder(
-                  side: const BorderSide(color: Colors.white),
+                  side: const BorderSide(color: Colors.black),
                   borderRadius: BorderRadius.circular(5))),
           onPressed: onPressed,
           child: Row(
