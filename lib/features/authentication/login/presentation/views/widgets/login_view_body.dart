@@ -126,8 +126,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                   CustomTextField(
                       controller: emailController,
                       hintText: "Email / Phone Number",
-                      hintStyle:
-                          const TextStyle( fontSize: 16)),
+                      hintStyle: const TextStyle(fontSize: 16)),
                   BlocBuilder<PasswordVisibilityCubit, bool>(
                     builder: (context, state) {
                       return CustomTextField(
@@ -150,8 +149,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                               ),
                             )),
                         hintText: "Password",
-                        hintStyle:
-                            const TextStyle( fontSize: 16),
+                        hintStyle: const TextStyle(fontSize: 16),
                       );
                     },
                   ),
@@ -176,7 +174,6 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                   const Center(
                       child: Text("OR",
                           style: TextStyle(
-                           
                             fontSize: 15,
                           ))),
                   const SizedBox(
@@ -189,7 +186,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                     text: "Log in With Google",
                   ),
                   const SizedBox(
-                    height: 120,
+                    height: 70,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
