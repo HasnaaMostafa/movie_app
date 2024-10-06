@@ -40,7 +40,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
             children: [
               Text(
                 "Movie",
-                style: TextStyle( fontSize: 25),
+                style: TextStyle(fontSize: 25),
               ),
               Text("zone",
                   style: TextStyle(color: Color(0xffea0101), fontSize: 25)),
@@ -106,7 +106,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                   children: [
                     const Text(
                       "Create Account",
-                      style: TextStyle( fontSize: 25),
+                      style: TextStyle(fontSize: 25),
                     ),
                     const SizedBox(
                       height: 20,
@@ -116,7 +116,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                       child: Text(
                         textAlign: TextAlign.center,
                         "Let's get you started and create account",
-                        style: TextStyle( fontSize: 14),
+                        style: TextStyle(fontSize: 14),
                       ),
                     ),
                     const SizedBox(
@@ -187,7 +187,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                                 TextSpan(
                                   text:
                                       "Yes,I understand and agree to Moviezone Terms of service , including the ",
-                                  style: TextStyle(),
+                                  style: TextStyle(color: Colors.grey),
                                 ),
                                 TextSpan(
                                   text: " User Agreement and Privacy Policy",
@@ -235,7 +235,6 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                     const Center(
                         child: Text("OR",
                             style: TextStyle(
-                              
                               fontSize: 15,
                             ))),
                     const SizedBox(

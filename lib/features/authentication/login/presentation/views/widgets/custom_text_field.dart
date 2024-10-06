@@ -55,7 +55,7 @@ class CustomTextField extends StatelessWidget {
               onFieldSubmitted: onFieldSubmitted,
               obscureText: isPassword ?? false,
               style: const TextStyle(
-                  color: Colors.black,
+                  color: Colors.grey,
                   fontSize: 18,
                   fontWeight: FontWeight.normal),
               decoration: InputDecoration(
@@ -63,18 +63,16 @@ class CustomTextField extends StatelessWidget {
                     const EdgeInsets.only(left: 19, top: 18, bottom: 18),
                 hintText: hintText,
                 hintStyle: hintStyle,
-                fillColor: Colors.white,
-                filled: true,
                 suffixIcon: suffix,
                 enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
-                    borderSide: const BorderSide(color: Color(0xff1d1d1d))),
+                    borderSide: const BorderSide(color: Colors.grey)),
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
-                    borderSide: const BorderSide(color: Color(0xff1d1d1d))),
+                    borderSide: const BorderSide(color: Colors.grey)),
                 focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
-                    borderSide: const BorderSide(color: Color(0xff1d1d1d))),
+                    borderSide: const BorderSide(color: Colors.grey)),
                 isDense: true,
               ),
             ),

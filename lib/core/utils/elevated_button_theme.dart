@@ -9,11 +9,11 @@ class TElevatedButtonTheme {
   /* -- Light Theme -- */
   static final lightElevatedButtonTheme = ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      side: const BorderSide(),
       padding: const EdgeInsets.symmetric(
           vertical: TSizes.buttonHeight, horizontal: 20),
       textStyle: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w500),
       shape: RoundedRectangleBorder(
+          side: const BorderSide(color: Colors.transparent),
           borderRadius: BorderRadius.circular(TSizes.buttonRadius)),
     ),
   );
@@ -21,9 +21,9 @@ class TElevatedButtonTheme {
   /* -- Dark Theme -- */
   static final darkElevatedButtonTheme = ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      side: const BorderSide(),
       textStyle: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w500),
       shape: RoundedRectangleBorder(
+          side: const BorderSide(color: Colors.transparent),
           borderRadius: BorderRadius.circular(TSizes.buttonRadius)),
     ),
   );

@@ -16,9 +16,8 @@ class GoogleAuth extends StatelessWidget {
       height: 60,
       child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.white,
+              backgroundColor: Colors.white24,
               shape: RoundedRectangleBorder(
-                  side: const BorderSide(color: Colors.black),
                   borderRadius: BorderRadius.circular(5))),
           onPressed: onPressed,
           child: Row(
@@ -31,7 +30,7 @@ class GoogleAuth extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 5.0),
                 child: Text(
                   text,
-                  style: const TextStyle(color: Colors.black, fontSize: 15),
+                  style: const TextStyle(color: Colors.white, fontSize: 15),
                 ),
               ),
             ],
